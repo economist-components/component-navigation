@@ -76,6 +76,19 @@
   font-weight: bold;
 }
 
+.navigation__user-menu-manage-subscription {
+  font-size: var(--text-size-step--2);
+  margin-top: 2em;
+  display: block;
+  text-align: left;
+}
+
+.navigation__user-menu-manage-subscription-link {
+  color: var(--navigation__user-menu-manage-subscription-link-color, var(--color-chicago));
+  margin-left: 1em;
+  font-weight: bold;
+}
+
 .navigation__user-menu .balloon {
   display: flex;
 }

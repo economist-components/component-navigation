@@ -50,12 +50,14 @@ export default class Navigation extends React.Component {
     }
     const loginUrl = `/user/login${destinationParameter}`;
     const registerUrl = `/user/register${destinationParameter}`;
-    const userMenuBalloonTrigger = (<Button
-      href={loginUrl}
-      className="navigation__user-menu-link navigation__user-menu-link--login"
-      icon={{ icon: 'user', size: '28px' }}
-      unstyled
-                                    >Log in</Button>);
+    const userMenuBalloonTrigger = (
+      <Button
+        href={loginUrl}
+        className="navigation__user-menu-link navigation__user-menu-link--login"
+        icon={{ icon: 'user', size: '28px' }}
+        unstyled
+      >Log in</Button>
+    );
     return (
       <Balloon showOnHover trigger={userMenuBalloonTrigger}>
         <div>
@@ -68,10 +70,14 @@ export default class Navigation extends React.Component {
           </Button>
           <span className="navigation__user-menu-register">
             New to <span className="navigation__user-menu-the-economist-name">The Economist</span>?
-            <a
-              className="navigation__user-menu-register-link"
-              href={registerUrl}
-            >Register now</a>
+            <a className="navigation__user-menu-register-link" href={registerUrl}>
+              Register now
+            </a>
+          </span>
+          <span className="navigation__user-menu-manage-subscription">
+            <a className="navigation__user-menu-manage-subscription-link" href="/user">
+              Manage my subscription
+            </a>
           </span>
         </div>
       </Balloon>
