@@ -105,7 +105,7 @@ describe(`A navigation`, () => {
       const listElements = instance.renderLoginLogout().props.children.props.children;
       const loginLink = listElements.slice(-1)[0];
       const href = loginLink.props.children.props.href;
-      href.should.equal(`/logout?destination=${decodeURIComponent('%2Ffoo%2Fbar')}`);
+      href.should.equal(`/logout?destination=/foo/bar`);
     });
   });
 });
