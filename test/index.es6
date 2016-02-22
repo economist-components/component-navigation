@@ -96,14 +96,16 @@ describe(`A navigation`, () => {
     });
     it('When the user is logged in it\'s a link to /logout?destination={this.props.currentUrl}', () => {
       const instance = new Navigation({
-        currentUrl: '/foo/bar',
+        logoutDestination: '/foo/bar',
         userLoggedIn: true,
         sectionsCardData: context,
         accordionData: accordionContext,
         sharedMenu,
       });
-      instance.renderLoginLogout()
-        .props.href.should.equal('/logout?destination=%2Ffoo%2Fbar');
+      const listElements = instance.renderLoginLogout().props.children.props.children;
+      const loginLink = listElements.slice(-1)[0];
+      const href = loginLink.props.children.props.href;
+      href.should.equal(`/logout?destination=/foo/bar`);
     });
   });
 });

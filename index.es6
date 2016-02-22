@@ -97,7 +97,7 @@ export default class Navigation extends React.Component {
             <li className="navigation__user-menu-linklist-item">
               <a
                 className="navigation__user-menu-linklist-link--cta"
-                href={`/logout?destination=${ logoutDestination }`}
+                href={`/logout?destination=${logoutDestination}`}
               >
                 Log out
               </a>
