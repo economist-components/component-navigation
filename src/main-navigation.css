@@ -86,3 +86,31 @@
   display: table-cell;
   vertical-align: middle;
 }
+
+@media (--navigation-small-mobile-down) {
+  .navigation__user-menu-link-label {
+    display: none;
+  }
+  .navigation__user-menu {
+    padding: 0;
+  }
+  .navigation__link.link-button--icon-background {
+    /* Ensure tappability and consistency with other icons. */
+    box-sizing: border-box;
+    min-width: 64px;
+    padding: 0;
+    /* Center the background icon to the <A>. */
+    background-position: center;
+  }
+  .navigation__user-menu .balloon {
+    /* We need to position the balloon in relationship to the navigation. */
+    position: static;
+  }
+  .navigation__user-menu .balloon-content {
+    /* Let's use all the available room in small devices. */
+    /* stylelint-disable */
+    right: 0 !important;
+    /* stylelint-enable */
+    left: 0;
+  }
+}
