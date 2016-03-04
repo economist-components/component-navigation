@@ -68,7 +68,7 @@ export default class Navigation extends React.Component {
         className={`navigation__user-menu-link navigation__link navigation__user-menu-link--${ buttonClassSuffix }`}
         icon={{ icon: 'user', color: 'thimphu', useBackground: true }}
         unstyled
-      >{buttonText}</Button>
+      ><span className="navigation__user-menu-link-label">{buttonText}</span></Button>
     );
     if (userLoggedIn && userIsSubscriber) {
       return (
@@ -255,7 +255,6 @@ export default class Navigation extends React.Component {
         <div className="navigation__primary-inner">
           <a href="http://www.economist.com" className="navigation__link-logo">
             <Icon icon="economist" size="64px" {...svgUri} />
-            <div className="navigation__link-empty-logo" />
           </a>
           <Balloon
             className="navigation__main-navigation-link navigation__mobile-accordion"

@@ -3,6 +3,7 @@
 @custom-media --navigation-tablet-up (width >= 860px);
 @custom-media --navigation-mobile-down (width <= 768px);
 @custom-media --navigation-mobile-up (width >= 769px);
+@custom-media --navigation-small-mobile-down (width <= 400px);
 
 :root {
   --navigation-text-size: var(--text-size-step--2);
