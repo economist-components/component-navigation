@@ -79,10 +79,3 @@
 .navigation__primary-inner {
   display: table-row;
 }
-
-/* stylelint-disable */
-.navigation__primary-inner > * {
-  /* stylelint-enable */
-  display: table-cell;
-  vertical-align: middle;
-}
