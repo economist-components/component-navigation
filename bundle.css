@@ -1031,23 +1031,42 @@ need to have a fixed height */
           align-items: center;
 }
 
-/* IE9 Flexbox fallback */
-
 .navigation__primary {
   display: table;
+  width: 100%;
+  height: 64px;
+  line-height: 1em;
+  background: #383E42;
+  z-index: 2;
 }
+
+/* stylelint-disable rule-no-duplicate-properties, selector-no-universal */
 
 .navigation__primary-inner {
   display: table-row;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  height: 64px;
 }
-
-/* stylelint-disable */
 
 .navigation__primary-inner > * {
-  /* stylelint-enable */
-  display: table-cell;
+  display: table-cell; /* IE9 Flexbox fallback */
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   vertical-align: middle;
+  /* Required by IE */
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
 }
+
+/* stylelint-enable */
 
 .icon--apps {
   background: url("data:image/svg+xml,%3Csvg%20width%3D%22%22%20height%3D%22%22%20viewBox%3D%220%200%201024%201024%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20style%3D%22%22%3E%0A%20%20%20%20%0A%20%20%20%20%3Ctitle%3Eapps%3C%2Ftitle%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C%2Fdesc%3E%0A%20%20%20%20%3Cdefs%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M218%2C248.00%20L218%2C248.00%20L218%2C775.99%20C218%2C792.56%20231.43%2C806%20248.00%2C806%20L775.99%2C806%20C792.56%2C806%20806%2C792.56%20806%2C775.99%20L806%2C248.00%20C806%2C231.43%20792.56%2C218%20775.99%2C218%20L248.00%2C218%20C231.43%2C218%20218%2C231.43%20218%2C248.00%20L218%2C248.00%20Z%20M148%2C248.00%20C148%2C192.77%20192.76%2C148%20248.00%2C148%20L775.99%2C148%20C831.22%2C148%20876%2C192.76%20876%2C248.00%20L876%2C775.99%20C876%2C831.22%20831.23%2C876%20775.99%2C876%20L248.00%2C876%20C192.77%2C876%20148%2C831.23%20148%2C775.99%20L148%2C248.00%20L148%2C248.00%20Z%22%20id%3D%22Shape%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20id%3D%22Rectangle-50%22%20x%3D%22278.16%22%20y%3D%22278.26%22%20width%3D%22207.5%22%20height%3D%22207.5%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20id%3D%22Rectangle-50-Copy-2%22%20x%3D%22278.16%22%20y%3D%22538.99%22%20width%3D%22207.5%22%20height%3D%22207.5%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20id%3D%22Rectangle-50-Copy%22%20x%3D%22539.09%22%20y%3D%22278.26%22%20width%3D%22207.5%22%20height%3D%22207.5%22%2F%3E%0A%3C%2Fsvg%3E");
@@ -1472,38 +1491,6 @@ need to have a fixed height */
 .navigation a:hover {
 /* stylelint-enable */
   cursor: pointer;
-}
-
-.navigation__primary {
-  width: 100%;
-  height: 64px;
-  line-height: 1em;
-  background: #383E42;
-  z-index: 2;
-}
-
-.navigation__primary-inner {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-  height: 64px;
-}
-
-/* stylelint-disable */
-
-.navigation__primary-inner > * {
-/* stylelint-enable */
-  /* Required by older version of Safari */
-  /* stylelint-disable */
-  display: -webkit-box;
-  /* stylelint-enable */
-  /* Required by IE */
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 0 auto;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
 }
 
 .navigation__primary-expander {
