@@ -1068,6 +1068,34 @@ need to have a fixed height */
 
 /* stylelint-enable */
 
+@media (max-width: 400px) {
+  .navigation__user-menu-link-label {
+    display: none;
+  }
+  .navigation__user-menu {
+    padding: 0;
+  }
+  .navigation__link.link-button--icon-background {
+    /* Ensure tappability and consistency with other icons. */
+    box-sizing: border-box;
+    min-width: 64px;
+    padding: 0;
+    /* Center the background icon to the <A>. */
+    background-position: center;
+  }
+  .navigation__user-menu .balloon {
+    /* We need to position the balloon in relationship to the navigation. */
+    position: static;
+  }
+  .navigation__user-menu .balloon-content {
+    /* Let's use all the available room in small devices. */
+    /* stylelint-disable */
+    right: 0 !important;
+    /* stylelint-enable */
+    left: 0;
+  }
+}
+
 .icon--apps {
   background: url("data:image/svg+xml,%3Csvg%20width%3D%22%22%20height%3D%22%22%20viewBox%3D%220%200%201024%201024%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20style%3D%22%22%3E%0A%20%20%20%20%0A%20%20%20%20%3Ctitle%3Eapps%3C%2Ftitle%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C%2Fdesc%3E%0A%20%20%20%20%3Cdefs%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M218%2C248.00%20L218%2C248.00%20L218%2C775.99%20C218%2C792.56%20231.43%2C806%20248.00%2C806%20L775.99%2C806%20C792.56%2C806%20806%2C792.56%20806%2C775.99%20L806%2C248.00%20C806%2C231.43%20792.56%2C218%20775.99%2C218%20L248.00%2C218%20C231.43%2C218%20218%2C231.43%20218%2C248.00%20L218%2C248.00%20Z%20M148%2C248.00%20C148%2C192.77%20192.76%2C148%20248.00%2C148%20L775.99%2C148%20C831.22%2C148%20876%2C192.76%20876%2C248.00%20L876%2C775.99%20C876%2C831.22%20831.23%2C876%20775.99%2C876%20L248.00%2C876%20C192.77%2C876%20148%2C831.23%20148%2C775.99%20L148%2C248.00%20L148%2C248.00%20Z%22%20id%3D%22Shape%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20id%3D%22Rectangle-50%22%20x%3D%22278.16%22%20y%3D%22278.26%22%20width%3D%22207.5%22%20height%3D%22207.5%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20id%3D%22Rectangle-50-Copy-2%22%20x%3D%22278.16%22%20y%3D%22538.99%22%20width%3D%22207.5%22%20height%3D%22207.5%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20id%3D%22Rectangle-50-Copy%22%20x%3D%22539.09%22%20y%3D%22278.26%22%20width%3D%22207.5%22%20height%3D%22207.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
@@ -1520,26 +1548,10 @@ need to have a fixed height */
   height: 64px;
 }
 
-.navigation__link-empty-logo {
-  display: none;
-  width: 1em;
-  height: 100%;
-  background: #E3120b;
-}
-
 .navigation__primary .navigation__main-sections-card .balloon--content {
   /* Stop this from being taller than screen */
   overflow-y: auto;
   max-height: calc(100vh - 64px);
-}
-
-@media (max-width: 768px) {
-  .navigation__link-logo .Icon-economist {
-    display: none;
-  }
-  .navigation__link-empty-logo {
-    display: block;
-  }
 }
 
 @media (min-width: 769px) {

@@ -57789,7 +57789,11 @@ var Navigation = (function (_React$Component) {
         icon: { icon: 'user', color: 'thimphu', useBackground: true },
         unstyled: true
       },
-      buttonText
+      _react2['default'].createElement(
+        'span',
+        { className: 'navigation__user-menu-link-label' },
+        buttonText
+      )
     );
     if (userLoggedIn && userIsSubscriber) {
       return _react2['default'].createElement(
@@ -58072,8 +58076,7 @@ var Navigation = (function (_React$Component) {
         _react2['default'].createElement(
           'a',
           { href: 'http://www.economist.com', className: 'navigation__link-logo' },
-          _react2['default'].createElement(_economistComponentIcon2['default'], _extends({ icon: 'economist', size: '64px' }, svgUri)),
-          _react2['default'].createElement('div', { className: 'navigation__link-empty-logo' })
+          _react2['default'].createElement(_economistComponentIcon2['default'], _extends({ icon: 'economist', size: '64px' }, svgUri))
         ),
         _react2['default'].createElement(
           _economistComponentBalloon2['default'],
