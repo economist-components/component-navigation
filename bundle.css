@@ -690,7 +690,11 @@ need to have a fixed height */
 
 .navigation__mobile-accordion .balloon-content {
   overflow-y: auto;
+  /* Worst case scenario considered is iPhone4 resolution */
+  /* stylelint-disable rule-no-duplicate-properties */
+  max-height: 450px;
   max-height: calc(100vh - 64px);
+  /* stylelint-enable rule-no-duplicate-properties */
   padding: 0;
 }
 
