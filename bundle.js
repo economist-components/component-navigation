@@ -2678,7 +2678,7 @@ var clickHandler = require('../utils/clickHandler');
 var debug = require('debug')('I13nMixin');
 var DebugDashboard = require('../utils/DebugDashboard');
 var I13nUtils = require('./I13nUtils');
-var listen = require('subscribe-ui-event/dist/lib/listen');
+var listen = require('subscribe-ui-event').listen;
 var ReactI13n = require('../libs/ReactI13n');
 var ViewportMixin = require('./viewport/ViewportMixin');
 require('setimmediate');
@@ -2882,6 +2882,21 @@ var I13nMixin = {
     },
 
     /**
+     * _shouldFollowLink, provide a hook to check followLink.
+     * It check if component implement its own shouldFollowLink() method, 
+     * otherwise return props.followLink or props.follow
+     * @method _shouldFollowLink
+     * @private
+     */
+    _shouldFollowLink: function () {
+        if (undefined !== this.shouldFollowLink) {
+            return this.shouldFollowLink();
+        }
+
+        return (undefined !== props.followLink) ? props.followLink : props.follow;
+    },
+
+    /**
      * _subComponentsViewportDetection, will be executed by viewport mixin
      * @method _subComponentsViewportDetection
      * @private
@@ -3031,7 +3046,7 @@ var I13nMixin = {
 
 module.exports = I13nMixin;
 
-},{"../libs/ReactI13n":16,"../utils/DebugDashboard":20,"../utils/clickHandler":21,"./I13nUtils":18,"./viewport/ViewportMixin":19,"debug":25,"react":"react","react-dom":"react-dom","setimmediate":29,"subscribe-ui-event/dist/lib/listen":34}],18:[function(require,module,exports){
+},{"../libs/ReactI13n":16,"../utils/DebugDashboard":20,"../utils/clickHandler":21,"./I13nUtils":18,"./viewport/ViewportMixin":19,"debug":25,"react":"react","react-dom":"react-dom","setimmediate":29,"subscribe-ui-event":38}],18:[function(require,module,exports){
 var React = require('react');
 var ReactI13n = require('../libs/ReactI13n');
 
@@ -3224,7 +3239,7 @@ module.exports = Viewport;
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
 /* global document, window*/
-var listen = require('subscribe-ui-event/dist/lib/listen');
+var listen = require('subscribe-ui-event').listen;
 
 var uniqueId = 0;
 
@@ -3401,7 +3416,7 @@ DebugDashboard.prototype.destroy = function () {
 
 module.exports = DebugDashboard;
 
-},{"subscribe-ui-event/dist/lib/listen":34}],21:[function(require,module,exports){
+},{"subscribe-ui-event":38}],21:[function(require,module,exports){
 /**
  * Copyright 2015, Yahoo Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -3459,7 +3474,7 @@ module.exports = function clickHandler (e) {
     var isRedirectLink = isDefaultRedirectLink(target);
     var isPreventDefault = true;
     var props = self.props;
-    var followLink = (undefined !== props.followLink) ? props.followLink : props.follow;
+    var followLink = self._shouldFollowLink();
     var href = '';
 
     // return and do nothing if the handler is append on a component without I13nMixin
@@ -7838,11 +7853,18 @@ var cof = require('./_cof')
   // ES3 wrong here
   , ARG = cof(function(){ return arguments; }()) == 'Arguments';
 
+// fallback for IE11 Script Access Denied error
+var tryGet = function(it, key){
+  try {
+    return it[key];
+  } catch(e){ /* empty */ }
+};
+
 module.exports = function(it){
   var O, T, B;
   return it === undefined ? 'Undefined' : it === null ? 'Null'
     // @@toStringTag case
-    : typeof (T = (O = Object(it))[TAG]) == 'string' ? T
+    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
     // builtinTag case
     : ARG ? cof(O)
     // ES3 arguments fallback
@@ -8179,7 +8201,7 @@ module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
   return C;
 };
 },{"./_an-instance":89,"./_export":112,"./_fails":114,"./_for-of":117,"./_global":118,"./_inherit-if-required":123,"./_is-object":129,"./_iter-detect":134,"./_meta":142,"./_redefine":166,"./_redefine-all":165,"./_set-to-string-tag":171}],105:[function(require,module,exports){
-var core = module.exports = {version: '2.1.3'};
+var core = module.exports = {version: '2.1.4'};
 if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 },{}],106:[function(require,module,exports){
 // optional / simple context binding
@@ -8794,18 +8816,18 @@ var getKeys  = require('./_object-keys')
   , gOPS     = require('./_object-gops')
   , pIE      = require('./_object-pie')
   , toObject = require('./_to-object')
-  , IObject  = require('./_iobject');
+  , IObject  = require('./_iobject')
+  , $assign  = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
-module.exports = require('./_fails')(function(){
-  var a = Object.assign
-    , A = {}
+module.exports = !$assign || require('./_fails')(function(){
+  var A = {}
     , B = {}
     , S = Symbol()
     , K = 'abcdefghijklmnopqrst';
   A[S] = 7;
   K.split('').forEach(function(k){ B[k] = k; });
-  return a({}, A)[S] != 7 || Object.keys(a({}, B)).join('') != K;
+  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
 }) ? function assign(target, source){ // eslint-disable-line no-unused-vars
   var T     = toObject(target)
     , aLen  = arguments.length
@@ -8819,9 +8841,8 @@ module.exports = require('./_fails')(function(){
       , j      = 0
       , key;
     while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
-  }
-  return T;
-} : Object.assign;
+  } return T;
+} : $assign;
 },{"./_fails":114,"./_iobject":125,"./_object-gops":152,"./_object-keys":155,"./_object-pie":156,"./_to-object":188}],146:[function(require,module,exports){
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject    = require('./_an-object')
@@ -12315,7 +12336,8 @@ var global         = require('./_global')
   , SymbolRegistry = shared('symbol-registry')
   , AllSymbols     = shared('symbols')
   , ObjectProto    = Object.prototype
-  , USE_NATIVE     = typeof $Symbol == 'function';
+  , USE_NATIVE     = typeof $Symbol == 'function'
+  , QObject        = global.QObject;
 
 // fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
 var setSymbolDesc = DESCRIPTORS && $fails(function(){
@@ -12467,7 +12489,8 @@ for(var symbols = (
   if(!(key in Wrapper))dP(Wrapper, key, {value: USE_NATIVE ? sym : wrap(sym)});
 };
 
-setter = true;
+// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
+if(!QObject || !QObject.prototype || !QObject.prototype.findChild)setter = true;
 
 $export($export.S + $export.F * !USE_NATIVE, 'Symbol', {
   // 19.4.2.1 Symbol.for(key)
