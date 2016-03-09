@@ -57866,7 +57866,7 @@ var Navigation = (function (_React$Component) {
             { className: 'navigation__user-menu-linklist-item' },
             _react2['default'].createElement(
               'a',
-              { className: 'navigation__user-menu-linklist-link', href: '/users/' + penName + '/newsletters' },
+              { className: 'navigation__user-menu-linklist-link', href: '/user/' + penName + '/newsletters' },
               'Newsletters'
             )
           ),
@@ -57875,7 +57875,7 @@ var Navigation = (function (_React$Component) {
             { className: 'navigation__user-menu-linklist-item' },
             _react2['default'].createElement(
               'a',
-              { className: 'navigation__user-menu-linklist-link', href: '/users/' + penName + '/comments' },
+              { className: 'navigation__user-menu-linklist-link', href: '/user/' + penName + '/comments' },
               'My comments'
             )
           ),
@@ -57942,7 +57942,7 @@ var Navigation = (function (_React$Component) {
             { className: 'navigation__user-menu-linklist-item' },
             _react2['default'].createElement(
               'a',
-              { className: 'navigation__user-menu-linklist-link', href: '/users/' + penName + '/newsletters' },
+              { className: 'navigation__user-menu-linklist-link', href: '/user/' + penName + '/newsletters' },
               'Newsletters'
             )
           ),
@@ -57951,7 +57951,7 @@ var Navigation = (function (_React$Component) {
             { className: 'navigation__user-menu-linklist-item' },
             _react2['default'].createElement(
               'a',
-              { className: 'navigation__user-menu-linklist-link', href: '/users/' + penName + '/comments' },
+              { className: 'navigation__user-menu-linklist-link', href: '/user/' + penName + '/comments' },
               'My comments'
             )
           ),
