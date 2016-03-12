@@ -2893,7 +2893,7 @@ var I13nMixin = {
             return this.shouldFollowLink();
         }
 
-        return (undefined !== props.followLink) ? props.followLink : props.follow;
+        return (undefined !== this.props.followLink) ? this.props.followLink : this.props.follow;
     },
 
     /**
@@ -4437,12 +4437,21 @@ var scroll = {
     delta: 0,
     top: 0
 };
+var touch = {
+    axisIntention: '',
+    startX: 0,
+    startY: 0,
+    deltaX: 0,
+    deltaY: 0
+};
 
 // global variables
 var doc;
 var docBody;
 var docEl;
 var win;
+
+var INTENTION_THRESHOLD = 5;
 
 if (typeof window !== 'undefined') {
     win = window;
@@ -4458,17 +4467,38 @@ if (typeof window !== 'undefined') {
  */
 function ArgmentedEvent(option) {
     option = option || {};
-    this.type = option.type || '';
+    var mainType = (option.mainType || '').toLowerCase();
+    var subType = (option.subType || '').toLowerCase();
+
+    this.mainType = mainType;
+    this.subType = subType;
+    this.type = mainType + subType.charAt(0).toUpperCase() + subType.slice(1) || '';
     this.scroll = scroll;
     this.resize = resize;
+    this.touch = touch;
 }
 
 ArgmentedEvent.prototype = {
-    update: function update(mainType) {
-        var top;
+    getXY: function getXY(touch) {
+        var t = { x: 0, y: 0 };
+
+        if (touch.pageX || touch.pageY) {
+            t.x = touch.pageX;
+            t.y = touch.pageY;
+        } else {
+            t.x = touch.clientX + docBody.scrollLeft + docEl.scrollLeft;
+            t.y = touch.clientY + docBody.scrollTop + docEl.scrollTop;
+        }
+
+        return t;
+    },
+
+    update: function update(e) {
+        var mainType = this.mainType;
+        var subType = this.subType;
 
         if (globalVars.enableScrollInfo && (mainType === 'scroll' || mainType === 'touchmove')) {
-            top = docEl.scrollTop + docBody.scrollTop;
+            var top = docEl.scrollTop + docBody.scrollTop;
             // Prevent delta from being 0
             if (top !== this.scroll.top) {
                 this.scroll.delta = top - this.scroll.top;
@@ -4478,6 +4508,32 @@ ArgmentedEvent.prototype = {
         if (globalVars.enableResizeInfo && mainType === 'resize') {
             this.resize.width = win.innerWidth || docEl.clientWidth;
             this.resize.height = win.innerHeight || docEl.clientHeight;
+        }
+        if (globalVars.enableTouchInfo && e.touches && (mainType === 'touchstart' || mainType === 'touchmove' || mainType === 'touchend')) {
+            var pos;
+            var absX;
+            var absY;
+            if (mainType === 'touchstart' || subType === 'start') {
+                pos = this.getXY(e.touches[0]);
+                this.touch.axisIntention = '';
+                this.touch.startX = pos.x;
+                this.touch.startY = pos.y;
+                this.touch.deltaX = 0;
+                this.touch.deltaY = 0;
+            } else if (mainType === 'touchmove') {
+                pos = this.getXY(e.touches[0]);
+                this.touch.deltaX = pos.x - this.touch.startX;
+                this.touch.deltaY = pos.y - this.touch.startY;
+                if (this.touch.axisIntention === '') {
+                    absX = Math.abs(this.touch.deltaX);
+                    absY = Math.abs(this.touch.deltaY);
+                    if (absX > INTENTION_THRESHOLD && absX >= absY) {
+                        this.touch.axisIntention = 'x';
+                    } else if (absY > INTENTION_THRESHOLD && absY > absX) {
+                        this.touch.axisIntention = 'y';
+                    }
+                }
+            }
         }
     }
 };
@@ -4639,10 +4695,17 @@ var EVENT_END_DELAY = require('./constants').EVENT_END_DELAY;
 // global variables
 var doc;
 var win;
+var body;
+var hashId = 0;
 
 if (typeof window !== 'undefined') {
     win = window;
     doc = win.document || document;
+    body = doc.body;
+}
+
+function getHash(domNode) {
+    return domNode.id || 'target-id-' + hashId++;
 }
 
 /**
@@ -4700,11 +4763,15 @@ function connectThrottle(throttledEvent, cb, ctx, throttledMainEvent) {
  * @param {String} event - A subscribe event.
  */
 function connectContinuousEvent(target, mainEvent, event) {
-    return function throttleEvent(throttleRate, cb, context) {
+    return function throttleEvent(throttleRate, cb, options) {
+        var context = options.context;
+        var domTarget = options.target;
+        var domId = domTarget && getHash(domTarget);
+
         var throttledStartEvent = mainEvent + 'Start:' + throttleRate;
         var throttledEndEvent = mainEvent + 'End:' + throttleRate;
-        var throttledMainEvent = mainEvent + ':' + throttleRate;
-        var throttledEvent = event + ':' + throttleRate;
+        var throttledMainEvent = mainEvent + ':' + throttleRate + (domId ? ':' + domId : '');
+        var throttledEvent = event + ':' + throttleRate + (domId ? ':' + domId : '');
 
         var remover = connectThrottle(throttledEvent, cb, context, throttledMainEvent);
         removers.push(remover);
@@ -4714,9 +4781,9 @@ function connectContinuousEvent(target, mainEvent, event) {
         }
 
         var ae = {
-            start: new AugmentedEvent({ type: mainEvent + 'Start' }), // start
-            main: new AugmentedEvent({ type: mainEvent }), // main
-            end: new AugmentedEvent({ type: mainEvent + 'End' }) };
+            start: new AugmentedEvent({ mainType: mainEvent, subType: 'start' }), // start
+            main: new AugmentedEvent({ mainType: mainEvent }), // main
+            end: new AugmentedEvent({ mainType: mainEvent, subType: 'end' }) };
 
         // No throttle for throttleRate = 0
         // end
@@ -4729,18 +4796,18 @@ function connectContinuousEvent(target, mainEvent, event) {
 
         var timer;
         function endCallback(e) {
-            ae.end.update(mainEvent);
+            ae.end.update(e);
             EE.emit(throttledEndEvent, e, ae.end);
             timer = null;
         }
         function handler(e) {
-            ae.start.update(mainEvent);
             if (!timer) {
+                ae.start.update(e);
                 EE.emit(throttledStartEvent, e, ae.start);
             }
             clearTimeout(timer);
 
-            // No need to call ae.main.update(), because ae.start.update is called, everything is update-to-date.
+            ae.main.update(e);
             EE.emit(throttledMainEvent, e, ae.main);
             if (!leIE8) {
                 timer = setTimeout(endCallback.bind(null, e), throttleRate + EVENT_END_DELAY);
@@ -4753,15 +4820,19 @@ function connectContinuousEvent(target, mainEvent, event) {
             }
         }
 
-        listeners[throttledMainEvent] = listen(target, mainEvent, handler);
+        listeners[throttledMainEvent] = listen(domTarget || target, mainEvent, handler);
         return remover;
     };
 }
 
 function connectDiscreteEvent(target, event) {
-    return function throttleEvent(throttleRate, cb, context) {
+    return function throttleEvent(throttleRate, cb, options) {
+        var context = options.context;
+        var domTarget = options.target;
+        var domId = domTarget && getHash(domTarget);
+
         // no throttling for discrete event
-        var throttledEvent = event + ':0';
+        var throttledEvent = event + ':0' + (domId ? ':' + domId : '');
 
         var remover = connectThrottle(throttledEvent, cb, context);
         removers.push(remover);
@@ -4770,14 +4841,14 @@ function connectDiscreteEvent(target, event) {
             return remover;
         }
 
-        var ae = new AugmentedEvent({ type: event });
+        var ae = new AugmentedEvent({ mainType: event });
 
         function handler(e) {
-            ae.update(event);
+            ae.update(e);
             EE.emit(throttledEvent, e, ae);
         }
 
-        listeners[throttledEvent] = listen(target, event, handler);
+        listeners[throttledEvent] = listen(domTarget || target, event, handler);
         return remover;
     };
 }
@@ -4790,11 +4861,11 @@ module.exports = {
     resizeEnd: connectContinuousEvent(win, 'resize', 'resizeEnd'),
     resize: connectContinuousEvent(win, 'resize', 'resize'),
     visibilitychange: connectDiscreteEvent(doc, 'visibilitychange'),
-    touchmoveStart: connectContinuousEvent(win, 'touchmove', 'touchmoveStart'),
-    touchmoveEnd: connectContinuousEvent(win, 'touchmove', 'touchmoveEnd'),
-    touchmove: connectContinuousEvent(win, 'touchmove', 'touchmove'),
-    touchstart: connectDiscreteEvent(doc, 'touchstart'),
-    touchend: connectDiscreteEvent(doc, 'touchend')
+    touchmoveStart: connectContinuousEvent(body, 'touchmove', 'touchmoveStart'),
+    touchmoveEnd: connectContinuousEvent(body, 'touchmove', 'touchmoveEnd'),
+    touchmove: connectContinuousEvent(body, 'touchmove', 'touchmove'),
+    touchstart: connectDiscreteEvent(body, 'touchstart'),
+    touchend: connectDiscreteEvent(body, 'touchend')
 };
 
 },{"./AugmentedEvent":30,"./constants":31,"./globalVars":32,"./lib/leIE8":33,"./lib/listen":34,"./lib/rAFThrottle":35,"lodash/function/throttle":42,"lodash/lang/clone":66}],37:[function(require,module,exports){
@@ -4844,8 +4915,9 @@ function subscribe(type, cb, options) {
     // once those variables enabled, then never disabled.
     globalVars.enableScrollInfo = globalVars.enableScrollInfo || options.enableScrollInfo || false;
     globalVars.enableResizeInfo = globalVars.enableResizeInfo || options.enableResizeInfo || false;
+    globalVars.enableTouchInfo = globalVars.enableTouchInfo || options.enableTouchInfo || false;
 
-    return mainEventConnectors[type](throttleRate, cb, options.context);
+    return mainEventConnectors[type](throttleRate, cb, options);
 }
 
 module.exports = subscribe;
@@ -8201,7 +8273,7 @@ module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
   return C;
 };
 },{"./_an-instance":89,"./_export":112,"./_fails":114,"./_for-of":117,"./_global":118,"./_inherit-if-required":123,"./_is-object":129,"./_iter-detect":134,"./_meta":142,"./_redefine":166,"./_redefine-all":165,"./_set-to-string-tag":171}],105:[function(require,module,exports){
-var core = module.exports = {version: '2.1.4'};
+var core = module.exports = {version: '2.1.5'};
 if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 },{}],106:[function(require,module,exports){
 // optional / simple context binding
@@ -8754,17 +8826,11 @@ var global    = require('./_global')
   , head, last, notify;
 
 var flush = function(){
-  var parent, domain, fn;
-  if(isNode && (parent = process.domain)){
-    process.domain = null;
-    parent.exit();
-  }
+  var parent, fn;
+  if(isNode && (parent = process.domain))parent.exit();
   while(head){
-    domain = head.domain;
-    fn     = head.fn;
-    if(domain)domain.enter();
+    fn = head.fn;
     fn(); // <- currently we use it only for Promise - try / catch not required
-    if(domain)domain.exit();
     head = head.next;
   } last = undefined;
   if(parent)parent.enter();
@@ -8777,11 +8843,11 @@ if(isNode){
   };
 // browsers with MutationObserver
 } else if(Observer){
-  var toggle = 1
+  var toggle = true
     , node   = document.createTextNode('');
   new Observer(flush).observe(node, {characterData: true}); // eslint-disable-line no-new
   notify = function(){
-    node.data = toggle = -toggle;
+    node.data = toggle = !toggle;
   };
 // environments with maybe non-completely correct, but existent Promise
 } else if(Promise && Promise.resolve){
@@ -8802,7 +8868,7 @@ if(isNode){
 }
 
 module.exports = function(fn){
-  var task = {fn: fn, next: undefined, domain: isNode && process.domain};
+  var task = {fn: fn, next: undefined};
   if(last)last.next = task;
   if(!head){
     head = task;
@@ -10605,12 +10671,13 @@ require('./_set-species')('Array');
 // 20.3.3.1 / 15.9.4.4 Date.now()
 var $export = require('./_export');
 
-$export($export.S, 'Date', {now: function(){ return +new Date; }});
+$export($export.S, 'Date', {now: function(){ return new Date().getTime(); }});
 },{"./_export":112}],220:[function(require,module,exports){
 'use strict';
 // 20.3.4.36 / 15.9.5.43 Date.prototype.toISOString()
 var $export = require('./_export')
-  , fails   = require('./_fails');
+  , fails   = require('./_fails')
+  , getTime = Date.prototype.getTime;
 
 var lz = function(num){
   return num > 9 ? num : '0' + num;
@@ -10623,7 +10690,7 @@ $export($export.P + $export.F * (fails(function(){
   new Date(NaN).toISOString();
 })), 'Date', {
   toISOString: function toISOString(){
-    if(!isFinite(this))throw RangeError('Invalid time value');
+    if(!isFinite(getTime.call(this)))throw RangeError('Invalid time value');
     var d = this
       , y = d.getUTCFullYear()
       , m = d.getUTCMilliseconds()
@@ -10653,10 +10720,11 @@ $export($export.P + $export.F * require('./_fails')(function(){
 var DateProto    = Date.prototype
   , INVALID_DATE = 'Invalid Date'
   , TO_STRING    = 'toString'
-  , $toString    = DateProto[TO_STRING];
+  , $toString    = DateProto[TO_STRING]
+  , getTime      = DateProto.getTime;
 if(new Date(NaN) + '' != INVALID_DATE){
   require('./_redefine')(DateProto, TO_STRING, function toString(){
-    var value = +this;
+    var value = getTime.call(this);
     return value === value ? $toString.call(this) : INVALID_DATE;
   });
 }
@@ -11340,6 +11408,7 @@ var LIBRARY            = require('./_library')
   , TypeError          = global.TypeError
   , process            = global.process
   , $Promise           = global[PROMISE]
+  , process            = global.process
   , isNode             = classof(process) == 'process'
   , empty              = function(){ /* empty */ }
   , Internal, GenericPromiseCapability, Wrapper;
@@ -11397,6 +11466,7 @@ var notify = function(promise, isReject){
       var handler = ok ? reaction.ok : reaction.fail
         , resolve = reaction.resolve
         , reject  = reaction.reject
+        , domain  = reaction.domain
         , result, then;
       try {
         if(handler){
@@ -11404,7 +11474,12 @@ var notify = function(promise, isReject){
             if(promise._h == 2)onHandleUnhandled(promise);
             promise._h = 1;
           }
-          result = handler === true ? value : handler(value);
+          if(handler === true)result = value;
+          else {
+            if(domain)domain.enter();
+            result = handler(value);
+            if(domain)domain.exit();
+          }
           if(result === reaction.promise){
             reject(TypeError('Promise-chain cycle'));
           } else if(then = isThenable(result)){
@@ -11523,9 +11598,10 @@ if(!USE_NATIVE){
   Internal.prototype = require('./_redefine-all')($Promise.prototype, {
     // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
     then: function then(onFulfilled, onRejected){
-      var reaction = newPromiseCapability(speciesConstructor(this, $Promise));
-      reaction.ok   = typeof onFulfilled == 'function' ? onFulfilled : true;
-      reaction.fail = typeof onRejected == 'function' && onRejected;
+      var reaction    = newPromiseCapability(speciesConstructor(this, $Promise));
+      reaction.ok     = typeof onFulfilled == 'function' ? onFulfilled : true;
+      reaction.fail   = typeof onRejected == 'function' && onRejected;
+      reaction.domain = isNode ? process.domain : undefined;
       this._c.push(reaction);
       if(this._a)this._a.push(reaction);
       if(this._s)notify(this, false);
