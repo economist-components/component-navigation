@@ -276,11 +276,13 @@ body {
 
 .navigation__user-menu .balloon-content {
   right: -100px;
+  min-width: 320px;
   padding: 2em 2em 1.5em 2em;
   font-size: 0.8em;
   line-height: normal;
   line-height: initial;
   text-align: center;
+  z-index: 2;
 }
 
 .navigation__user-menu-popup--anonymous .balloon-content {
@@ -335,11 +337,6 @@ body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-}
-
-.navigation__user-menu .balloon-content {
-  min-width: 320px;
-  z-index: 2;
 }
 
 @media (max-width: 1000px) {
@@ -664,13 +661,6 @@ td.gsc-input {
   display: none;
 }
 
-.navigation__mobile-accordion  .balloon-content {
-  top: 100%;
-  /* stylelint-disable */
-  left: 0 !important;
-  /* stylelint-enable */
-}
-
 .navigation__mobile-accordion .navigation__sections-link {
   display: -webkit-box;
   display: -webkit-flex;
@@ -690,11 +680,15 @@ need to have a fixed height */
 
 .navigation__mobile-accordion .balloon-content {
   overflow-y: auto;
+  top: 100%;
+  /* stylelint-disable */
+  left: 0 !important;
+  /* stylelint-enable */
   /* Worst case scenario considered is iPhone4 resolution */
-  /* stylelint-disable rule-no-duplicate-properties */
+  /* stylelint-disable declaration-block-no-duplicate-properties */
   max-height: 450px;
   max-height: calc(100vh - 64px);
-  /* stylelint-enable rule-no-duplicate-properties */
+  /* stylelint-enable declaration-block-no-duplicate-properties */
   padding: 0;
 }
 
@@ -1044,7 +1038,7 @@ need to have a fixed height */
   z-index: 2;
 }
 
-/* stylelint-disable rule-no-duplicate-properties, selector-no-universal */
+/* stylelint-disable declaration-block-no-duplicate-properties, selector-no-universal */
 
 .navigation__primary-inner {
   display: table-row;
