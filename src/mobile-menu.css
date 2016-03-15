@@ -116,9 +116,8 @@ need to have a fixed height */
   padding-left: 3.5em;
 }
 
-/* Workaround to fix the no-baseline aligment of the font */
-
 .navigation__mobile-accordion .link-button--icon-background::before {
+  /* Workaround to fix the no-baseline aligment of the font */
   content: '';
   display: block;
   height: 0.28em;
