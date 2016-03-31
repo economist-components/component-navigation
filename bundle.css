@@ -107,6 +107,8 @@ body {
  * Css grid variables
  */
 
+/* stylelint-disable number-max-precision */
+
 .icon {
   display: inline-block;
   width: 1em;
