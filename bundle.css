@@ -1,50 +1,73 @@
+/* stylelint-disable custom-property-pattern, number-max-precision */
+
 @font-face {
-  font-family: "EconSans";
+  font-family: EconSans;
   font-weight: 300;
-  src: url('/assets/ecosans-lig.woff2') format('woff2'), /* Super Modern Browsers */
-  url('/assets/ecosans-lig.woff') format('woff'); /* Pretty Modern Browsers */
+  src:
+    /* Super Modern Browsers */
+    url('/assets/ecosans-lig.woff2') format('woff2'),
+    /* Pretty Modern Browsers */
+    url('/assets/ecosans-lig.woff') format('woff');
 }
 
 @font-face {
-  font-family: "EconSans";
+  font-family: EconSans;
   font-style: normal;
-  src: url('/assets/ecosans-reg.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/assets/ecosans-reg.woff') format('woff'); /* Pretty Modern Browsers */
+  src:
+    /* Super Modern Browsers */
+    url('/assets/ecosans-reg.woff2') format('woff2'),
+    /* Pretty Modern Browsers */
+    url('/assets/ecosans-reg.woff') format('woff');
 }
 
 @font-face {
-  font-family: "EconSans";
+  font-family: EconSans;
   font-weight: 700;
-  src: url('/assets/ecosans-bol.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/assets/ecosans-bol.woff') format('woff'); /* Pretty Modern Browsers */
+  src:
+    /* Super Modern Browsers */
+    url('/assets/ecosans-bol.woff2') format('woff2'),
+    /* Pretty Modern Browsers */
+    url('/assets/ecosans-bol.woff') format('woff');
 }
 
 @font-face {
-  font-family: "EconSans";
+  font-family: EconSans;
   font-style: italic;
-  src: url('/assets/ecosans-ita.woff2') format('woff2'), /* Super Modern Browsers */
-  url('/assets/ecosans-ita.woff') format('woff'); /* Pretty Modern Browsers */
+  src:
+    /* Super Modern Browsers */
+    url('/assets/ecosans-ita.woff2') format('woff2'),
+    /* Pretty Modern Browsers */
+    url('/assets/ecosans-ita.woff') format('woff');
 }
 
 @font-face {
-  font-family: "MiloSerifPro";
+  font-family: MiloSerifPro;
   font-style: normal;
-  src: url('/assets/ecoserif-reg.woff2') format('woff2'), /* Super Modern Browsers */
-  url('/assets/ecoserif-reg.woff') format('woff'); /* Pretty Modern Browsers */
+  src:
+    /* Super Modern Browsers */
+    url('/assets/ecoserif-reg.woff2') format('woff2'),
+    /* Pretty Modern Browsers */
+    url('/assets/ecoserif-reg.woff') format('woff');
 }
 
 @font-face {
-  font-family: "MiloSerifPro";
+  font-family: MiloSerifPro;
   font-style: italic;
-  src: url('/assets/ecoserif-ita.woff2') format('woff2'), /* Super Modern Browsers */
-  url('/assets/ecoserif-ita.woff') format('woff'); /* Pretty Modern Browsers */
+  src:
+    /* Super Modern Browsers */
+    url('/assets/ecoserif-ita.woff2') format('woff2'),
+    /* Pretty Modern Browsers */
+    url('/assets/ecoserif-ita.woff') format('woff');
 }
 
 @font-face {
-  font-family: "MiloSerifPro";
+  font-family: MiloSerifPro;
   font-weight: 500;
-  src: url('/assets/ecoserif-med.woff2') format('woff2'), /* Super Modern Browsers */
-  url('/assets/ecoserif-med.woff') format('woff'); /* Pretty Modern Browsers */
+  src:
+    /* Super Modern Browsers */
+    url('/assets/ecoserif-med.woff2') format('woff2'),
+    /* Pretty Modern Browsers */
+    url('/assets/ecoserif-med.woff') format('woff');
 }
 
 /**
@@ -83,9 +106,11 @@
   /* Font: FF Milo Serif OT Medium */
 }
 
+/* stylelint-disable selector-no-type */
+
 html {
-  line-height: 1.35;
   font-size: 18px;
+  line-height: 1.35;
 }
 
 @media screen and (min-width: 500px) {
@@ -95,8 +120,8 @@ html {
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 /**
@@ -136,7 +161,7 @@ body {
   position: absolute;
   padding: 2em 18px;
   padding: 2em 1rem;
-  background: #F2F2F2;
+  background: #f2f2f2;
   z-index: 1;
 }
 
@@ -185,7 +210,7 @@ body {
   width: 0;
   height: 0;
   margin-left: -6px;
-  border-color: transparent transparent  #F2F2F2 transparent;
+  border-color: transparent transparent  #f2f2f2 transparent;
   border-style: solid;
   border-width: 0 6px 6px 6px;
   z-index: 2;
@@ -199,8 +224,8 @@ body {
   text-decoration: none;
   padding: 0.714em 36px;
   padding: 0.714em 2rem;
-  background-color: #3E51B5;
-  color: #FFFFFF;
+  background-color: #3e51b5;
+  color: #fff;
   border-radius: .3em;
   cursor: pointer;
   -webkit-user-select: none;
@@ -210,7 +235,7 @@ body {
 }
 
 .link-button--disabled {
-  background-color: #B6B6B6;
+  background-color: #b6b6b6;
   cursor: default;
 }
 
@@ -255,14 +280,14 @@ body {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  color: #FFFFFF;
+  color: #fff;
   text-decoration: none;
 }
 
 .navigation__user-menu-link--logout,
 .navigation__user-menu-link--login {
   outline: 0;
-  color: #FFFFFF;
+  color: #fff;
   font-size: 0.79012em;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -295,7 +320,7 @@ body {
   margin: 0 auto 2em;
   font-weight: bold;
   text-align: center;
-  background: #3E51B5;
+  background: #3e51b5;
 }
 
 .navigation__user-menu-linklist {
@@ -314,16 +339,16 @@ body {
 }
 
 .navigation__user-menu-linklist-link {
-  color: #383E42;
+  color: #383e42;
   text-decoration: none;
 }
 
 .navigation__user-menu-linklist-link:hover {
-  color: #3E51B5;
+  color: #3e51b5;
 }
 
 .navigation__user-menu-linklist-link--cta {
-  color: #3E51B5;
+  color: #3e51b5;
   font-weight: bold;
 }
 
@@ -355,9 +380,9 @@ body {
   display: table-cell;
   vertical-align: middle;
   width: 100%;
-  color: #FFFFFF;
-  background: #FFFFFF;
-  border-top: 1px solid #F2F2F2;
+  color: #fff;
+  background: #fff;
+  border-top: 1px solid #f2f2f2;
 }
 
 .google-search .gsc-search-box {
@@ -372,7 +397,7 @@ body {
 .google-search input.gsc-input {
   padding: 0;
   outline: none;
-  color: #383E42;
+  color: #383e42;
   font-size: 2em;
   border: none;
 }
@@ -415,12 +440,12 @@ td.gsc-input {
   left: auto;
   height: 64px;
   border-collapse: collapse;
-  color: #FFFFFF;
+  color: #fff;
   font-size: 1em;
 }
 
 .navigation__search .error--message {
-  color: #E3120b;
+  color: #e3120b;
 }
 
 .navigation__search-magnifier {
@@ -428,7 +453,7 @@ td.gsc-input {
   vertical-align: middle;
   min-width: 50px;
   text-align: center;
-  border-top: 1px solid #F2F2F2;
+  border-top: 1px solid #f2f2f2;
 }
 
 .navigation__collapsed-magnifier {
@@ -444,7 +469,7 @@ td.gsc-input {
 .navigation__collapsed-magnifier use,
 .navigation__collapsed-magnifier svg {
 /* stylelint-enable */
-  fill: #FFFFFF;
+  fill: #fff;
 }
 
 .navigation__search--open {
@@ -453,7 +478,7 @@ td.gsc-input {
   right: 0;
   bottom: 0;
   left: 0;
-  background: #FFFFFF;
+  background: #fff;
 }
 
 .navigation__show-field-group {
@@ -467,7 +492,7 @@ td.gsc-input {
   height: 0.88889em;
   padding-left: 28px;
 
-  color: #FFFFFF;
+  color: #fff;
   font-size: 0.88889em;
   font-size: 0.79012em;
   text-align: center;
@@ -486,7 +511,7 @@ td.gsc-input {
   width: 64px;
   min-width: 50px;
   height: 64px;
-  background-color: #383E42;
+  background-color: #383e42;
 }
 
 .navigation__search-close-button.icon--close-thimphu {
@@ -593,7 +618,7 @@ td.gsc-input {
 }
 
 .accordion > .list__item:not(:last-child) {
-  border-bottom: solid 1px #B6B6B6;
+  border-bottom: solid 1px #b6b6b6;
 }
 
 .accordion > .list__item,
@@ -620,7 +645,7 @@ td.gsc-input {
 
 .accordion .list__item svg,
 .accordion .list__item use {
-  fill: #3E51B5;
+  fill: #3e51b5;
 }
 
 /* stylelint-enable selector-no-type */
@@ -637,11 +662,11 @@ td.gsc-input {
 
 @media (max-width: 768px) {
 
-  .navigation__mobile-accordion.navigation__main-navigation-link { /* stylelint-disable */
+  .navigation__mobile-accordion.navigation__main-navigation-link {/* stylelint-disable */
     display: -webkit-box !important;
     display: -webkit-flex !important;
     display: -ms-flexbox !important;
-    display: flex !important; /* stylelint-enable */
+    display: flex !important;/* stylelint-enable */
   }
   }
 
@@ -653,7 +678,7 @@ td.gsc-input {
   height: 0;
   margin-right: 2em;
   margin-left: 2em;
-  border: solid #B6B6B6;
+  border: solid #b6b6b6;
   border-width: 1px 0 0;
 }
 
@@ -765,7 +790,7 @@ need to have a fixed height */
 .navigation__mobile-accordion .link-button--styled {
   margin: 1em;
   padding: 0.5em;
-  color: #FFFFFF;
+  color: #fff;
   font-weight: normal;
   text-align: center;
 }
@@ -780,7 +805,7 @@ need to have a fixed height */
 
 .sections-card {
   padding: 0;
-  color: #B6B6B6;
+  color: #b6b6b6;
   font-family: 'EconSans', Tahoma, sans-serif;
   font-size: 18px;
   font-size: 1rem;
@@ -795,13 +820,13 @@ need to have a fixed height */
 .sections-card .link-button {
   display: block;
   padding-left: 0.5em;
-  color: #383E42;
+  color: #383e42;
   font-size: 0.79012em;
   text-decoration: none;
 }
 
 .sections-card__list .link-button:hover {
-  color: #3E51B5;
+  color: #3e51b5;
 }
 
 .sections-card__list {
@@ -815,7 +840,7 @@ need to have a fixed height */
 }
 
 .sections-card__link {
-  color: #B6B6B6;
+  color: #b6b6b6;
 }
 
 .sections-card .list__item {
@@ -926,14 +951,14 @@ need to have a fixed height */
 
 .sections-card__list-media,
 .sections-card__list-blogs {
-  border-left: solid 1px #B6B6B6;
+  border-left: solid 1px #b6b6b6;
 }
 
 /* stylelint-disable selector-no-type */
 
 .sections-card__list-media svg,
 .sections-card__list-media use {
-  fill: #3E51B5;
+  fill: #3e51b5;
 }
 
 /* stylelint-enable selector-no-type */
@@ -945,7 +970,7 @@ need to have a fixed height */
 .sections-card__header {
   margin-top: 0;
   padding-left: 0.5em;
-  color: #383E42;
+  color: #383e42;
   font-size: 0.79012em;
   font-weight: bold;
   text-transform: uppercase;
@@ -971,7 +996,7 @@ need to have a fixed height */
   -webkit-align-self: center;
       -ms-flex-item-align: center;
           align-self: center;
-  color: #FFFFFF;
+  color: #fff;
   font-size: 0.79012em;
   white-space: nowrap
 }
@@ -988,14 +1013,14 @@ need to have a fixed height */
 
 .navigation__main-navigation-link > a {
   /* stylelint-enable selector-no-type  */
-  color: #FFFFFF;
+  color: #fff;
   white-space: nowrap;
 }
 
 .navigation__sections-link {
   position: relative;
   height: 100%;
-  color: #FFFFFF;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -1022,8 +1047,8 @@ need to have a fixed height */
 
 @media (max-width: 768px) {
 
-  .navigation__main-navigation--desktop { /* stylelint-disable */
-    display: none !important; /* stylelint-enable */
+  .navigation__main-navigation--desktop {/* stylelint-disable */
+    display: none !important;/* stylelint-enable */
   }
   }
 
@@ -1044,7 +1069,7 @@ need to have a fixed height */
   width: 100%;
   height: 64px;
   line-height: 1em;
-  background: #383E42;
+  background: #383e42;
   z-index: 2;
 }
 
@@ -1101,10 +1126,10 @@ need to have a fixed height */
 
 @media (max-width: 400px) {
 
-  .navigation__user-menu-link.link-button--icon-background { /* Ensure tappability and consistency with other icons. */
+  .navigation__user-menu-link.link-button--icon-background {/* Ensure tappability and consistency with other icons. */
     box-sizing: border-box;
     min-width: 64px;
-    padding: 0; /* Center the background icon to the <A>. */
+    padding: 0;/* Center the background icon to the <A>. */
     background-position: center;
   }
   }
@@ -1114,7 +1139,7 @@ need to have a fixed height */
 
 @media (max-width: 400px) {
 
-  .navigation__user-menu .balloon { /* We need to position the balloon in relationship to the navigation. */
+  .navigation__user-menu .balloon {/* We need to position the balloon in relationship to the navigation. */
     position: static;
   }
   }
@@ -1124,8 +1149,8 @@ need to have a fixed height */
 
 @media (max-width: 400px) {
 
-  .navigation__user-menu .balloon-content { /* Let's use all the available room in small devices. */ /* stylelint-disable */
-    right: 0 !important; /* stylelint-enable */
+  .navigation__user-menu .balloon-content {/* Let's use all the available room in small devices. *//* stylelint-disable */
+    right: 0 !important;/* stylelint-enable */
     left: 0;
   }
   }
@@ -1341,7 +1366,7 @@ need to have a fixed height */
 
 .navigation__secondary-inner {
   text-align: right;
-  background: #F2F2F2;
+  background: #f2f2f2;
 }
 
 .navigation__main-sections-card .balloon {
@@ -1380,7 +1405,7 @@ need to have a fixed height */
   .navigation__user-menu:hover use,
   .navigation__search:hover svg {
   /* stylelint-enable */
-    fill: #B6B6B6;
+    fill: #b6b6b6;
   }
 }
 
