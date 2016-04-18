@@ -218,34 +218,38 @@ body {
 
 .link-button--styled {
   display: inline-block;
-  font-family: 'EconSans', Tahoma, sans-serif;
-  font-size: 0.88889em;
-  line-height: 1.4;
-  text-decoration: none;
-  padding: 0.714em 36px;
-  padding: 0.714em 2rem;
-  background-color: #3e51b5;
-  color: #fff;
-  border-radius: .3em;
+  padding: 20px
+    20px;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  color: #000;
+  font-family: Tahoma, sans-serif;
+  font-size: 0.8em;
+  line-height: 1.4;
+  text-decoration: none;
+  background-color: #fff;
+  border-radius: 0.3em;
 }
 
 .link-button--disabled {
-  background-color: #b6b6b6;
   cursor: default;
+  background-color: #c0c0c0;
 }
 
 .link-button--shadow {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
 
+/* stylelint-disable selector-no-type */
+
 .link-button__group svg {
   vertical-align: bottom;
 }
+
+/* stylelint-enable selector-no-type */
 
 .link-button__icon {
   vertical-align: middle;
@@ -268,6 +272,7 @@ body {
 .navigation__user-menu .icon--user-thimphu {
   padding-left: 30px;
   background-position: left center;
+  background-repeat: no-repeat;
   background-size: 24px 24px;
 }
 
@@ -318,6 +323,11 @@ body {
   clear: both;
   display: block;
   margin: 0 auto 2em;
+  padding: 0.714em
+    36px;
+  padding: 0.714em
+    2rem;
+  color: #fff;
   font-weight: bold;
   text-align: center;
   background: #3e51b5;
@@ -499,6 +509,7 @@ td.gsc-input {
   text-decoration: none;
 
   background-position: left center;
+  background-repeat: no-repeat;
   background-size: 24px 24px;
 }
 
@@ -594,6 +605,7 @@ td.gsc-input {
 
 .accordion.list a {
   text-decoration: none;
+  background-repeat: no-repeat;
 }
 
 /* stylelint-enable selector-no-type */
@@ -930,7 +942,9 @@ need to have a fixed height */
 
 .sections-card__list-media .link-button.link-button--icon-background {
   padding-left: 2.5em;
+  cursor: pointer;
   background-position: 5px center;
+  background-repeat: no-repeat;
   background-size: 1.8em;
 }
 
