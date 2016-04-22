@@ -255,51 +255,13 @@ body {
   vertical-align: middle;
 }
 
-.navigation__user-menu {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 0;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  font-family: inherit;
-  font-size: 0.79012em;
-}
-
-.navigation__user-menu .icon--user-thimphu {
-  padding-left: 30px;
-  background-position: left center;
-  background-repeat: no-repeat;
-  background-size: 24px 24px;
-}
-
-.navigation__user-menu-link {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  color: #fff;
-  text-decoration: none;
-}
-
 .navigation__user-menu-link--logout,
 .navigation__user-menu-link--login {
   outline: 0;
-  color: #fff;
-  font-size: 0.79012em;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.navigation__user-menu .balloon__link,
-.navigation__user-menu-link--logout,
-.navigation__user-menu-link--login {
+.navigation__user-menu .balloon__link {
   height: 64px;
   white-space: nowrap;
 }
@@ -312,7 +274,6 @@ body {
   line-height: normal;
   line-height: initial;
   text-align: center;
-  z-index: 2;
 }
 
 .navigation__user-menu-popup--anonymous .balloon-content {
@@ -427,150 +388,72 @@ td.gsc-input {
   display: none;
 }
 
-:root {
-  /* stylelint-disable */
-  /* legacy variable name needs to change someday (`navigation__search-label--font-size`) */
-  /* stylelint-enable */
-}
-
 .navigation__search {
-  padding: 0 32px 0 2em;
-  padding: 0 32px 0 18px;
-  padding: 0 32px 0 1rem;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 1 auto;
-      -ms-flex: 0 1 auto;
-          flex: 0 1 auto;
-}
-
-.navigation__search--open,
-.navigation__search--closed {
-  display: table;
+  display: table-row;
   right: 10px;
   left: auto;
   height: 64px;
   border-collapse: collapse;
-  color: #fff;
   font-size: 1em;
-}
-
-.navigation__search .error--message {
-  color: #e3120b;
-}
-
-.navigation__search-magnifier {
-  display: table-cell;
-  vertical-align: middle;
-  min-width: 50px;
-  text-align: center;
-  border-top: 1px solid #f2f2f2;
-}
-
-.navigation__collapsed-magnifier {
-  display: table-cell;
-  vertical-align: middle;
-  width: 64px;
-  min-width: 50px;
-  text-align: center;
-}
-
-/* stylelint-disable */
-
-.navigation__collapsed-magnifier use,
-.navigation__collapsed-magnifier svg {
-/* stylelint-enable */
-  fill: #fff;
-}
-
-.navigation__search--open {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   background: #fff;
 }
 
-.navigation__show-field-group {
-  display: table-row;
+.navigation__search .google-search {
+  /* Override width: 100% */
+  width: auto;
+  /* Override default border-top. We'll do it if we want. */
+  border-top: none;
 }
 
-.navigation__search-open-button.icon--magnifier-thimphu {
+.navigation__search-magnifier,
+.navigation__search .google-search,
+.navigation__search-close-button-wrapper {
   display: table-cell;
-  vertical-align: middle;
-  min-width: 50px;
-  height: 0.88889em;
-  padding-left: 28px;
+}
 
-  color: #fff;
-  font-size: 0.88889em;
-  font-size: 0.79012em;
-  text-align: center;
-  text-decoration: none;
+.navigation__search--top-of-page .navigation__search-magnifier,
+.navigation__search--top-of-page .google-search {
+  border-top: 1px solid #f2f2f2;
+}
 
-  background-position: left center;
+/* Using specificity of 2 because component-icon CSS overrides the entire "background" property */
+
+.navigation__search .navigation__search-magnifier.icon--background,
+.navigation__search .navigation__search-close-button {
+  width: 64px;
+  height: 64px;
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: 24px 24px;
 }
 
+.navigation__search--inline .google-search {
+  width: 100%;
+}
+
+.navigation__search--inline .gsc-input {
+
+  /* The same distance as the one between the compass and the right edge of the screen */
+
+  margin-left: 20px;
+}
+
+.navigation__search--inline .navigation__search-magnifier {
+  min-width: 64px;
+}
+
 .navigation__search-close-button-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
   width: 64px;
-  min-width: 50px;
-  height: 64px;
+  color: #fff;
   background-color: #383e42;
 }
 
-.navigation__search-close-button.icon--close-thimphu {
-  width: 100%;
-  height: 100%;
-  background-position: center center;
-  background-size: 24px 24px;
+.navigation__search-close-button {
+  display: block;
 }
 
-@media (max-width: 768px) {
-  .navigation__search--open .navigation__search-open-button {
-    width: 64px;
-    height: 64px;
-  }
-}
-
-@media (max-width: 860px) {
-  .navigation__search {
-    padding: 0;
-  }
-  .navigation__search-open-button {
-    min-width: 50px;
-    text-align: center;
-  }
-  .navigation__collapsed-magnifier {
-    display: table-cell;
-  }
-  .navigation__show-field-group .navigation__search-open-button {
-    display: none;
-  }
-}
-
-@media (min-width: 860px) {
-  .navigation__collapsed-magnifier {
-    display: none;
-  }
-  .navigation__show-field-group .navigation__search-open-button {
-    display: table-cell;
-  }
-}
-
-/* Bring Google Search on front */
-
-/* stylelint-disable */
-
-.gssb_c {
-/* stylelint-enable */
-  z-index: 10000000;
+.navigation__search .error--message {
+  color: #e3120b;
 }
 
 .accordion-expander--visible > .link-button--icon > .link-button__group .Icon-down {
@@ -706,14 +589,6 @@ td.gsc-input {
 }
 
 .navigation__mobile-accordion .navigation__sections-link {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
   outline: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -1005,41 +880,69 @@ need to have a fixed height */
   }
 }
 
-.navigation__main-navigation-link {
+.navigation__main-navigation-link,
+.navigation__main-navigation-link-button {
+  display: block;
+  height: 64px;
   padding: 0 2em;
-  -webkit-align-self: center;
-      -ms-flex-item-align: center;
-          align-self: center;
   color: #fff;
   font-size: 0.79012em;
+  line-height: 64px;
+  text-decoration: none;
   white-space: nowrap
 }
 
 @media (max-width: 860px) and (min-width: 769px) {
 
-  .navigation__main-navigation-link {
+  .navigation__main-navigation-link,
+.navigation__main-navigation-link-button {
     padding-right: 1.8em;
     padding-left: 1.8em;
   }
   }
 
-/* stylelint-disable selector-no-type */
+/* Using specificity of 2 because component-icon overrides entire background property */
 
-.navigation__main-navigation-link > a {
-  /* stylelint-enable selector-no-type  */
-  color: #fff;
-  white-space: nowrap;
+.navigation__main-navigation-link-button.link-button {
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
 }
 
-.navigation__sections-link {
-  position: relative;
-  height: 100%;
-  color: #fff;
-  text-decoration: none;
+.navigation__main-navigation-link-button {
+  padding-right: 1.8em;
+  padding-left: 30px
 }
 
-.navigation__main-navigation-link-subscribe {
-  font-family: 'EconSans', Tahoma, sans-serif;
+@media (max-width: 860px) and (min-width: 769px) {
+
+  .navigation__main-navigation-link-button {/* stylelint-disable *//* Shut up stylelint, this is beautiful. */
+    padding-right: 1.6em;/* stylelint-enable */
+  }
+  }
+
+.navigation__main-navigation-link-label {
+  line-height: 64px;
+  line-height: 64px
+}
+
+@media (max-width: 400px) {
+
+  .navigation__main-navigation-link-label {
+    display: none;
+  }
+  }
+
+@media (max-width: 400px) {
+  .navigation .navigation__main-navigation-link-subscribe {
+    display: none;
+  }
+}
+
+@media (min-width: 401px) {
+  .navigation .navigation__mobile-accordion-link--subscribe {
+    display: none;
+  }
 }
 
 .navigation__main-sections-card .balloon-content {
@@ -1066,8 +969,18 @@ need to have a fixed height */
   }
   }
 
-.navigation__main-navigation-link,
-.navigation__sections-link {
+/* stylelint-disable selector-no-universal */
+
+.navigation__main-navigation-link > * {
+
+  /* Some links are balloons, so they have children, which is why we need to reset this. */
+
+  line-height: normal;
+}
+
+/* stylelint-enable selector-no-universal */
+
+.navigation__main-navigation-link {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1084,7 +997,6 @@ need to have a fixed height */
   height: 64px;
   line-height: 1em;
   background: #383e42;
-  z-index: 2;
 }
 
 /* stylelint-disable declaration-block-no-duplicate-properties, selector-no-universal */
@@ -1095,7 +1007,6 @@ need to have a fixed height */
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  position: relative;
   height: 64px;
 }
 
@@ -1115,16 +1026,6 @@ need to have a fixed height */
 
 /* stylelint-enable declaration-block-no-duplicate-properties, selector-no-universal */
 
-.navigation__user-menu-link-label {
-}
-
-@media (max-width: 400px) {
-
-  .navigation__user-menu-link-label {
-    display: none;
-  }
-  }
-
 .navigation__user-menu {
 }
 
@@ -1134,6 +1035,12 @@ need to have a fixed height */
     padding: 0;
   }
   }
+
+/* Specificity of 2 to override media query in link-button */
+
+.navigation__main-navigation-link-button.navigation__main-navigation-link--search {
+  padding-right: 30px;
+}
 
 .navigation__user-menu-link.link-button--icon-background {
 }
@@ -1333,19 +1240,14 @@ need to have a fixed height */
   font-family: 'EconSans', Tahoma, sans-serif;
   font-size: 18px;
   font-size: 1rem;
-  z-index: 10000000;
 }
 
-/* stylelint-disable */
-
-.navigation .navigation__main-navigation-link,
-.navigation .navigation__main-navigation-link > a {
-  box-sizing: border-box;
-  height: 64px;
-  text-decoration: none;
-}
+/* stylelint-disable selector-no-type */
 
 .navigation .balloon > span {
+
+  /* stylelint-enable selector-no-type */
+
   display: inline-block;
   height: 100%;
 }
@@ -1403,25 +1305,16 @@ need to have a fixed height */
   max-height: calc(100vh - 64px);
 }
 
-.balloon--not-visible {
+.navigation .balloon--not-visible {
   overflow: hidden;
 }
 
 @media (min-width: 769px) {
   .navigation__main-navigation-link:hover,
-  .navigation__user-menu-link:hover,
-  .navigation__search-open-button:hover,
-  .navigation__sections-link:hover {
+  .navigation__main-navigation-link-button:hover {
     filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="5" /><feFuncG type="linear" slope="5" /><feFuncB type="linear" slope="5" /></feComponentTransfer><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="0.8" /><feFuncG type="linear" slope="0.8" /><feFuncB type="linear" slope="0.8" /></feComponentTransfer></filter></svg>#filter');
     -webkit-filter: grayscale(100%) brightness(5) brightness(80%);
             filter: grayscale(100%) brightness(5) brightness(80%);
-  }
-
-  /* stylelint-disable */
-  .navigation__user-menu:hover use,
-  .navigation__search:hover svg {
-  /* stylelint-enable */
-    fill: #b6b6b6;
   }
 }
 
