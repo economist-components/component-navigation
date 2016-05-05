@@ -122,6 +122,22 @@ describe('Navigation', () => {
       mobileMenu.childAt(3).find('.link-button').should.not.have.text('Subscribe');
     });
 
+    it('can accept a sub brand', () => {
+      const subBranding = (
+        <img
+          src="/assets/logo-world-if.svg"
+          className="sub-branding__logo"
+          height="64"
+          width="192"
+        />
+      );
+      const propsWithSubBrand = {
+        subBranding,
+        ...props,
+      };
+      rendered = mount(<Navigation {...propsWithSubBrand} userIsSubscriber />);
+      const subBrandNav = rendered.find('.navigation__sub-branding');
+      subBrandNav.find('img').should.be.present();
+    });
   });
-
 });
