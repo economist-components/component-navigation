@@ -8,15 +8,16 @@
 
 .navigation__main-navigation-link.navigation__mobile-accordion {
   /* stylelint-disable */
+  /* Shut up stylelint, this is beautiful. */
   display: none !important;
   /* stylelint-enable */
   padding: 0;
 }
 
-.navigation__mobile-accordion.navigation__main-navigation-link {
-
-  @media (--navigation-mobile-down) {
+@media (--navigation-mobile-down) {
+  .navigation__mobile-accordion.navigation__main-navigation-link {
     /* stylelint-disable */
+    /* Shut up stylelint, this is beautiful. */
     display: flex !important;
     /* stylelint-enable */
   }
@@ -35,6 +36,7 @@
 }
 
 /* stylelint-disable */
+/* Shut up stylelint, this is beautiful. */
 .navigation__mobile-accordion.accordionExpander--not-visible .balloon-content {
 /* stylelint-enable */
   display: none;
@@ -57,14 +59,12 @@ need to have a fixed height */
   overflow-y: auto;
   top: 100%;
   right: 0;
-  /* stylelint-disable declaration-no-important */
-  left: 0 !important;
-  /* stylelint-enable declaration-no-important */
+  /* stylelint-disable */
   /* Worst case scenario considered is iPhone4 resolution */
-  /* stylelint-disable declaration-block-no-duplicate-properties */
+  left: 0 !important;
   max-height: 450px;
   max-height: calc(100vh - var(--navigation__default-height));
-  /* stylelint-enable declaration-block-no-duplicate-properties */
+  /* stylelint-enable */
   padding: 0;
 }
 
@@ -97,6 +97,7 @@ need to have a fixed height */
 }
 
 /* stylelint-disable */
+/* Shut up stylelint, this is beautiful. */
 .navigation__mobile-accordion .Icon-down svg,
 .navigation__mobile-accordion .Icon-up svg {
   /* stylelint-enable */
@@ -104,6 +105,7 @@ need to have a fixed height */
 }
 
 /* stylelint-disable */
+/* Shut up stylelint, this is beautiful. */
 .navigation__mobile-accordion .link-button--icon:not(.accordionExpander__link) {
 /* stylelint-enable */
   background-position: 1em 50%;

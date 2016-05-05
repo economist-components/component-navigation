@@ -17,8 +17,11 @@
   line-height: var(--navigation__default-height);
   text-decoration: none;
   white-space: nowrap;
+}
 
-  @media (--navigation-tablet-down) and (--navigation-mobile-up) {
+@media (--navigation-tablet-down) and (--navigation-mobile-up) {
+  .navigation__main-navigation-link,
+  .navigation__main-navigation-link-button {
     padding-right: var(--main-navigation-link-padding-mobile, 1.8em);
     padding-left: var(--main-navigation-link-padding-mobile, 1.8em);
   }
@@ -35,8 +38,10 @@
 .navigation__main-navigation-link-button {
   padding-right: calc(var(--main-navigation-link-padding) + var(--main-navigation-icon-link-padding-nudge, -0.2em));
   padding-left: var(--main-navigation-link-icon-padding, 30px);
+}
 
-  @media (--navigation-tablet-down) and (--navigation-mobile-up) {
+@media (--navigation-tablet-down) and (--navigation-mobile-up) {
+  .navigation__main-navigation-link-button {
     /* stylelint-disable */
     /* Shut up stylelint, this is beautiful. */
     padding-right: calc(
@@ -48,8 +53,10 @@
 
 .navigation__main-navigation-link-label {
   line-height: var(--navigation__default-height, 64px);
+}
 
-  @media (--navigation-small-mobile-down) {
+@media (--navigation-small-mobile-down) {
+  .navigation__main-navigation-link-label {
     display: none;
   }
 }
@@ -80,21 +87,19 @@
   display: none;
 }
 
-.navigation__main-navigation--desktop {
-
-  @media (--navigation-mobile-down) {
+@media (--navigation-mobile-down) {
+  .navigation__main-navigation--desktop {
     /* stylelint-disable */
+    /* Shut up stylelint, this is beautiful. */
     display: none !important;
     /* stylelint-enable */
   }
 }
 
 /* stylelint-disable selector-no-universal */
+/* Some links are balloons, so they have children, which is why we need to reset this. */
 
 .navigation__main-navigation-link > * {
-
-  /* Some links are balloons, so they have children, which is why we need to reset this. */
-
   line-height: normal;
 }
 
@@ -114,6 +119,7 @@
 }
 
 /* stylelint-disable declaration-block-no-duplicate-properties, selector-no-universal */
+/* Shut up stylelint, this is beautiful. */
 
 .navigation__primary-inner {
   display: table-row;
@@ -131,9 +137,8 @@
 
 /* stylelint-enable declaration-block-no-duplicate-properties, selector-no-universal */
 
-.navigation__user-menu {
-
-  @media (--navigation-small-mobile-down) {
+@media (--navigation-small-mobile-down) {
+  .navigation__user-menu {
     padding: 0;
   }
 }
@@ -144,9 +149,8 @@
   padding-right: 30px;
 }
 
-.navigation__user-menu-link.link-button--icon-background {
-
-  @media (--navigation-small-mobile-down) {
+@media (--navigation-small-mobile-down) {
+  .navigation__user-menu-link.link-button--icon-background {
     /* Ensure tappability and consistency with other icons. */
     box-sizing: border-box;
     min-width: 64px;
@@ -156,22 +160,19 @@
   }
 }
 
-.navigation__user-menu .balloon {
-
-  @media (--navigation-small-mobile-down) {
+@media (--navigation-small-mobile-down) {
+  .navigation__user-menu .balloon {
     /* We need to position the balloon in relationship to the navigation. */
     position: static;
   }
 }
 
-.navigation__user-menu .balloon-content {
-
-  @media (--navigation-small-mobile-down) {
-    /* Let's use all the available room in small devices. */
+@media (--navigation-small-mobile-down) {
+  .navigation__user-menu .balloon-content {
     /* stylelint-disable */
+    /* Let's use all the available room in small devices. */
     right: 0 !important;
     /* stylelint-enable */
     left: 0;
   }
 }
-
