@@ -253,7 +253,9 @@ export default class Navigation extends React.Component {
     if (this.props.subBranding) {
       subBrandingEl = (
         <div className="navigation__sub-branding">
-          {this.props.subBranding}
+          <a href="/" className="navigation__sub-branding-link">
+            {this.props.subBranding}
+          </a>
         </div>
       );
     }

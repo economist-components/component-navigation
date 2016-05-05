@@ -188,16 +188,12 @@ const accordionContext = [
   },
 ];
 const subBranding = (
-  <span className="sub-branding">
-    <a href="/" className="sub-branding__link">
-      <img
-        src="/assets/logo-world-if.svg"
-        className="sub-branding__logo"
-        height="65"
-        width="150"
-      />
-    </a>
-  </span>
+  <img
+    src="/assets/logo-world-if.svg"
+    className="sub-branding__logo"
+    height="64"
+    width="192"
+  />
 );
 export default (
   <div>

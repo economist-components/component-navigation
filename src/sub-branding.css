@@ -1,11 +1,16 @@
 .navigation__sub-branding {
   overflow: hidden;
   width: auto;
-  max-width: 65px;
-  height: 65px;
+  max-width: 64px;
+  height: 64px;
   align-items: flex-end;
   flex-direction: column;
-  justify-content: center;
+  justify-content: initial;
+}
+
+.navigation__sub-branding-link {
+  display: block;
+  line-height: 0;
 }
 
 .navigation--sub-branding .navigation__primary-expander {
@@ -18,8 +23,13 @@
   padding-left: 0.5rem;
 }
 
-@media (--navigation-mobile-up) {
+.navigation--sub-branding .navigation__user-menu-link,
+.navigation--sub-branding .navigation__main-navigation-link--search {
+  padding-left: 2rem;
+}
+
+@media (--navigation-tablet-up) {
   .navigation__sub-branding {
-    max-width: 150px;
+    max-width: 192px;
   }
 }
