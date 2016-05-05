@@ -5,6 +5,7 @@
 @import './search';
 @import './mobile-menu';
 @import './main-navigation';
+@import './sub-branding';
 @import '@economist/component-typography';
 @import '@economist/component-icon/backgrounds/apps.css';
 @import '@economist/component-icon/backgrounds/close.css';

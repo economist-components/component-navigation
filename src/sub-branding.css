@@ -1,0 +1,25 @@
+.navigation__sub-branding {
+  overflow: hidden;
+  width: auto;
+  max-width: 65px;
+  height: 65px;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navigation--sub-branding .navigation__primary-expander {
+  display: none;
+}
+
+.navigation--sub-branding .navigation__main-navigation-link,
+.navigation--sub-branding .navigation__main-navigation-link-button {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+@media (--navigation-mobile-up) {
+  .navigation__sub-branding {
+    max-width: 150px;
+  }
+}
