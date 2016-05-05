@@ -187,8 +187,29 @@ const accordionContext = [
     },
   },
 ];
+const subBranding = (
+  <img
+    src="/assets/logo-world-if.svg"
+    className="sub-branding__logo"
+    height="64"
+    width="192"
+  />
+);
 export default (
   <div>
+    <div>
+        <Navigation className="navigation navigation--registered navigation--sub-branding navigation--sticked"
+          svgUri="assets/icons.svg"
+          sectionsCardData={navigationLinks}
+          moreBalloonData={moreBalloonData}
+          accordionData={accordionContext}
+          sharedMenu={sharedMenu}
+          subBranding={subBranding}
+        />
+        <p style={{ paddingBottom: '400px' }}>
+          Scroll down to experience the thrill of sticky header technology
+        </p>
+    </div>
     <div>
         <Navigation className="navigation navigation--registered navigation--sticked"
           svgUri="assets/icons.svg"

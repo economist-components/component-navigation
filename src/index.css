@@ -5,6 +5,7 @@
 @import './search';
 @import './mobile-menu';
 @import './main-navigation';
+@import './sub-branding';
 @import '@economist/component-typography';
 @import '@economist/component-icon/backgrounds/apps.css';
 @import '@economist/component-icon/backgrounds/close.css';
@@ -21,6 +22,7 @@
 }
 
 /* stylelint-disable selector-no-type */
+/* Shut up stylelint, this is beautiful. */
 
 .navigation .balloon > span {
 
@@ -41,6 +43,7 @@
 }
 
 /* stylelint-disable */
+/* Shut up stylelint, this is beautiful. */
 .navigation a:hover {
 /* stylelint-enable */
   cursor: pointer;

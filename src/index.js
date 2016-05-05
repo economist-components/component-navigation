@@ -249,6 +249,16 @@ export default class Navigation extends React.Component {
         <Icon icon="close" size="28px" color="white" />
       </a>
     );
+    let subBrandingEl = null;
+    if (this.props.subBranding) {
+      subBrandingEl = (
+        <div className="navigation__sub-branding">
+          <a href="/" className="navigation__sub-branding-link">
+            {this.props.subBranding}
+          </a>
+        </div>
+      );
+    }
     return (
       <div className="navigation__primary-inner">
         <a href="http://www.economist.com" className="navigation__link-logo">
@@ -304,6 +314,7 @@ export default class Navigation extends React.Component {
             <Accordion list={accordionData} />
           </div>
         </Balloon>
+        {subBrandingEl}
       </div>
     );
   }
@@ -331,6 +342,7 @@ export default class Navigation extends React.Component {
         </div>
       );
     }
+
     return (
       <StickyPosition className={this.props.className}>
         {children}
@@ -370,5 +382,9 @@ if (process.env.NODE_ENV !== 'production') {
     sectionsCardData: SectionsCard.propTypes.data,
     accordionData: Accordion.propTypes.list,
     moreBalloonData: SectionsCard.propTypes.data,
+    subBranding: React.PropTypes.oneOfType([
+      React.PropTypes.arrayOf(React.PropTypes.element),
+      React.PropTypes.element,
+    ]),
   };
 }

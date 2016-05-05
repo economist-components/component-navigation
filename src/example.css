@@ -5,12 +5,6 @@
 @import 'sticked.css';
 @import 'index.css';
 
-/* stylelint-disable */
-#component-preview {
-/* stylelint-enable */
-  background: #fff;
-}
-
 .component-panel {
   overflow: hidden;
 }

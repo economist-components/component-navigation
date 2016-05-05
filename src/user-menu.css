@@ -15,7 +15,7 @@
 .navigation__user-menu .balloon-content {
   right: -100px;
   min-width: 320px;
-  padding: 2em 2em 1.5em 2em;
+  padding: 2em 2em 1.5em;
   font-size: 0.8em;
   line-height: initial;
   text-align: center;
@@ -79,6 +79,7 @@
 @media (width <= 1000px) {
   .navigation__user-menu .balloon-content {
     /* stylelint-disable */
+    /* Shut up stylelint, this is beautiful. */
     right: -40px !important;
     /* stylelint-enable */
   }
