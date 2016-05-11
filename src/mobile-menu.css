@@ -63,9 +63,13 @@ need to have a fixed height */
   /* Worst case scenario considered is iPhone4 resolution */
   /* stylelint-disable declaration-block-no-duplicate-properties */
   max-height: 450px;
-  max-height: calc(100vh - var(--navigation__default-height));
+  max-height: calc(100vh - var(--navigation-height));
   /* stylelint-enable declaration-block-no-duplicate-properties */
   padding: 0;
+
+  @media(--navigation-mobile-up) {
+    max-height: calc(100vh - var(--navigation-desktop-height));
+  }
 }
 
 .navigation__mobile-accordion .Icon {

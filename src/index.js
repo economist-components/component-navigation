@@ -252,7 +252,7 @@ export default class Navigation extends React.Component {
     return (
       <div className="navigation__primary-inner">
         <a href="http://www.economist.com" className="navigation__link-logo">
-          <Icon icon="economist" size="64px" {...svgUri} />
+          <Icon icon="economist" size="48px" {...svgUri} />
         </a>
         <MenuTopic
           href={this.props.sharedMenu.topic.href}

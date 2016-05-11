@@ -5,7 +5,6 @@
   display: table-row;
   right: 10px;
   left: auto;
-  height: var(--navigation__height, var(--navigation__default-height));
   border-collapse: collapse;
   font-size: 1em;
   background: var(--navigation-search-color, var(--color-thimphu));
@@ -33,11 +32,16 @@
 
 .navigation__search .navigation__search-magnifier.icon--background,
 .navigation__search .navigation__search-close-button {
-  width: var(--search__close-button-height, 64px);
-  height: var(--search__close-button-height, 64px);
+  width: var(--navigation-height);
+  height: var(--navigation-height);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: var(--search-close-icon-size, 24px) var(--search-close-icon-size, 24px);
+
+  @media(--navigation-mobile-up) {
+    width: var(--navigation-desktop-height);
+    height: var(--navigation-desktop-height);
+  }
 }
 
 .navigation__search--inline .google-search {
@@ -48,17 +52,29 @@
 
   /* The same distance as the one between the compass and the right edge of the screen */
 
-  margin-left: calc(calc(var(--search__close-button-height, 64px) / 2) - calc(var(--search-close-icon-size, 24px) / 2));
+  margin-left: calc(calc(var(--navigation-height) / 2) - calc(var(--search-close-icon-size, 24px) / 2));
+
+  @media(--navigation-mobile-up) {
+    margin-left: calc(calc(var(--navigation-desktop-height) / 2) - calc(var(--search-close-icon-size, 24px) / 2));
+  }
 }
 
 .navigation__search--inline .navigation__search-magnifier {
-  min-width: var(--search__close-button-height, 64px);
+  min-width: var(--navigation-height);
+
+  @media(--navigation-mobile-up) {
+    min-width: var(--navigation-desktop-height);
+  }
 }
 
 .navigation__search-close-button-wrapper {
-  width: var(--search__close-button-height, 64px);
+  width: var(--navigation-height);
   color: var(--search__color, var(--color-thimphu));
   background-color: var(--search-close__background, var(--color-kiev));
+
+  @media(--navigation-mobile-up) {
+    width: var(--navigation-desktop-height);
+  }
 }
 
 .navigation__search-close-button {

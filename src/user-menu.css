@@ -7,11 +7,6 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.navigation__user-menu .balloon__link {
-  height: var(--navigation__default-height);
-  white-space: nowrap;
-}
-
 .navigation__user-menu .balloon-content {
   right: -100px;
   min-width: 320px;
