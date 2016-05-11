@@ -261,11 +261,6 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.navigation__user-menu .balloon__link {
-  height: 64px;
-  white-space: nowrap;
-}
-
 .navigation__user-menu .balloon-content {
   right: -100px;
   min-width: 320px;
@@ -392,7 +387,6 @@ td.gsc-input {
   display: table-row;
   right: 10px;
   left: auto;
-  height: 64px;
   border-collapse: collapse;
   font-size: 1em;
   background: #fff;
@@ -420,12 +414,21 @@ td.gsc-input {
 
 .navigation__search .navigation__search-magnifier.icon--background,
 .navigation__search .navigation__search-close-button {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: 24px 24px;
+  background-size: 24px 24px
 }
+
+@media(min-width: 769px) {
+
+  .navigation__search .navigation__search-magnifier.icon--background,
+.navigation__search .navigation__search-close-button {
+    width: 64px;
+    height: 64px;
+  }
+  }
 
 .navigation__search--inline .google-search {
   width: 100%;
@@ -435,18 +438,39 @@ td.gsc-input {
 
   /* The same distance as the one between the compass and the right edge of the screen */
 
-  margin-left: 20px;
+  margin-left: 12px
 }
+
+@media(min-width: 769px) {
+
+  .navigation__search--inline .gsc-input {
+    margin-left: 20px;
+  }
+  }
 
 .navigation__search--inline .navigation__search-magnifier {
-  min-width: 64px;
+  min-width: 48px
 }
 
+@media(min-width: 769px) {
+
+  .navigation__search--inline .navigation__search-magnifier {
+    min-width: 64px;
+  }
+  }
+
 .navigation__search-close-button-wrapper {
-  width: 64px;
+  width: 48px;
   color: #fff;
-  background-color: #383e42;
+  background-color: #383e42
 }
+
+@media(min-width: 769px) {
+
+  .navigation__search-close-button-wrapper {
+    width: 64px;
+  }
+  }
 
 .navigation__search-close-button {
   display: block;
@@ -607,10 +631,17 @@ need to have a fixed height */
   /* Worst case scenario considered is iPhone4 resolution */
   /* stylelint-disable declaration-block-no-duplicate-properties */
   max-height: 450px;
-  max-height: calc(100vh - 64px);
+  max-height: calc(100vh - 48px);
   /* stylelint-enable declaration-block-no-duplicate-properties */
-  padding: 0;
+  padding: 0
 }
+
+@media(min-width: 769px) {
+
+  .navigation__mobile-accordion .balloon-content {
+    max-height: calc(100vh - 64px);
+  }
+  }
 
 .navigation__mobile-accordion .Icon {
   width: 24px;
@@ -883,14 +914,23 @@ need to have a fixed height */
 .navigation__main-navigation-link,
 .navigation__main-navigation-link-button {
   display: block;
-  height: 64px;
+  height: 48px;
   padding: 0 2em;
   color: #fff;
   font-size: 0.79012em;
-  line-height: 64px;
+  line-height: 48px;
   text-decoration: none;
   white-space: nowrap
 }
+
+@media(min-width: 769px) {
+
+  .navigation__main-navigation-link,
+.navigation__main-navigation-link-button {
+    height: 64px;
+    line-height: 64px;
+  }
+  }
 
 @media (max-width: 860px) and (min-width: 769px) {
 
@@ -922,8 +962,6 @@ need to have a fixed height */
   }
 
 .navigation__main-navigation-link-label {
-  line-height: 64px;
-  line-height: 64px
 }
 
 @media (max-width: 400px) {
@@ -994,10 +1032,17 @@ need to have a fixed height */
 .navigation__primary {
   display: table;
   width: 100%;
-  height: 64px;
+  height: 48px;
   line-height: 1em;
-  background: #383e42;
+  background: #383e42
 }
+
+@media(min-width: 769px) {
+
+  .navigation__primary {
+    height: 64px;
+  }
+  }
 
 /* stylelint-disable declaration-block-no-duplicate-properties, selector-no-universal */
 
@@ -1007,8 +1052,15 @@ need to have a fixed height */
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 64px;
+  height: 48px
 }
+
+@media (min-width: 769px) {
+
+  .navigation__primary-inner {
+    height: 64px;
+  }
+  }
 
 .navigation__primary-inner > * {
   display: table-cell; /* IE9 Flexbox fallback */
@@ -1237,10 +1289,18 @@ need to have a fixed height */
 }
 
 .navigation {
+  height: 48px;
   font-family: 'EconSans', Tahoma, sans-serif;
   font-size: 18px;
-  font-size: 1rem;
+  font-size: 1rem
 }
+
+@media (min-width: 769px) {
+
+  .navigation {
+    height: 64px;
+  }
+  }
 
 /* stylelint-disable selector-no-type */
 
@@ -1289,21 +1349,43 @@ need to have a fixed height */
   position: static;
 }
 
+.navigation__link-logo .Icon {
+  height: 48px
+}
+
 @media (min-width: 769px) {
+
+  .navigation__link-logo .Icon {/* Explicitly setting the width fixes safari icon size. */
+    width: 128px;
+    height: 64px;
+  }
+  }
+
+.navigation__link-logo {
+  /* Go around a flex bug in IE by setting a minimum width */
+
+  min-width: 96px
+}
+
+@media (min-width: 769px) {
+
   .navigation__link-logo {
     min-width: 128px;
   }
-}
-
-.navigation__link-logo {
-  height: 64px;
-}
+  }
 
 .navigation__primary .navigation__main-sections-card .balloon--content {
   /* Stop this from being taller than screen */
   overflow-y: auto;
-  max-height: calc(100vh - 64px);
+  max-height: calc(100vh - 48px)
 }
+
+@media (min-width: 769px) {
+
+  .navigation__primary .navigation__main-sections-card .balloon--content {
+    max-height: calc(100vh - 64px);
+  }
+  }
 
 .navigation .balloon--not-visible {
   overflow: hidden;
