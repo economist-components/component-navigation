@@ -121,7 +121,7 @@
     "@economist/component-sections-card": "^3.2.0",
     "classnames": "^2.2.3",
     "lodash.throttle": "^4.0.1",
-    "react": "^0.14.8",
+    "react": "^15.0.1",
     "react-sticky-position": "^2.0.0",
     "svg4everybody": "^2.0.0"
   },
