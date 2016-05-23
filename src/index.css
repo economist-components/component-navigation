@@ -1,109 +1,33 @@
-@import '@economist/component-balloon';
-@import '@economist/component-icon';
-@import './settings';
-@import './user-menu';
-@import './search';
-@import './mobile-menu';
-@import './main-navigation';
-@import '@economist/component-typography';
-@import '@economist/component-icon/backgrounds/apps.css';
-@import '@economist/component-icon/backgrounds/close.css';
-@import '@economist/component-icon/backgrounds/film.css';
-@import '@economist/component-icon/backgrounds/headset.css';
-@import '@economist/component-icon/backgrounds/magnifier.css';
-@import '@economist/component-icon/backgrounds/radio.css';
-@import '@economist/component-icon/backgrounds/user.css';
-@import '@economist/component-icon/backgrounds/video.css';
-
 .navigation {
-  height: var(--navigation-height);
-  font-family: var(--fontfamily-sans);
-  font-size: 1rem;
-
-  @media (--navigation-mobile-up) {
-    height: var(--navigation-desktop-height);
-  }
+  height: var(--navigation--height, 60px);
+  color: var(--navigation--color, var(--color-berlin, #fff));
+  font-family: var(--navigation--font-family, var(--fontfamily-sans, sans-serif));
+  font-size: var(--navigation--font-size, 1rem);
+  background: var(--navigation--background, var(--color-beijing, #222));
 }
 
-/* stylelint-disable selector-no-type */
-
-.navigation .balloon > span {
-
-  /* stylelint-enable selector-no-type */
-
-  display: inline-block;
-  height: 100%;
-}
-/* stylelint-enable */
-
-.navigation__more .list {
-  column-count: 1;
+.navigation--sticky {
+  position: sticky;
+  top: 0;
 }
 
-.navigation__more .sections-card__list-sections,
-.navigation__more .sections-card__list-blogs {
-  max-width: 40%;
+.navigation__wrapper {
+  display: flex;
+  max-width: var(--navigation__wrapper--max-width, var(--page-max-width, 960px));
+  height: var(--navigation--height, 60px);
+  margin: 0 auto;
 }
 
-/* stylelint-disable */
-.navigation a:hover {
-/* stylelint-enable */
-  cursor: pointer;
+.navigation__logo {
+  order: 1;
 }
 
-.navigation__primary-expander {
-  width: 100%;
-  flex: 0 1 auto;
+.navigation__menu {
+  flex: 2;
+  order: 2;
 }
 
-.navigation__secondary-inner {
-  text-align: right;
-  background: var(--color-berlin);
-}
-
-.navigation__main-sections-card .balloon {
-  position: static;
-}
-
-.navigation__link-logo .Icon {
-  height: var(--navigation-height);
-
-  @media (--navigation-mobile-up) {
-
-    /* Explicitly setting the width fixes safari icon size. */
-
-    width: 128px;
-    height: var(--navigation-desktop-height);
-  }
-}
-
-.navigation__link-logo {
-  /* Go around a flex bug in IE by setting a minimum width */
-
-  min-width: 96px;
-
-  @media (--navigation-mobile-up) {
-    min-width: 128px;
-  }
-}
-
-.navigation__primary .navigation__main-sections-card .balloon--content {
-  /* Stop this from being taller than screen */
-  overflow-y: auto;
-  max-height: calc(100vh - var(--navigation-height));
-
-  @media (--navigation-mobile-up) {
-    max-height: calc(100vh - var(--navigation-desktop-height));
-  }
-}
-
-.navigation .balloon--not-visible {
-  overflow: hidden;
-}
-
-@media (--navigation-mobile-up) {
-  .navigation__main-navigation-link:hover,
-  .navigation__main-navigation-link-button:hover {
-    filter: grayscale(100%) brightness(5) brightness(80%);
-  }
+.navigation__extra {
+  flex: 1;
+  order: 3;
 }
