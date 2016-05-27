@@ -1,3 +1,20 @@
+[![By:Economist](
+  https://img.shields.io/badge/By-Economist-e3120b.svg?style=flat-square
+)](
+  http://www.economist.com/
+)[![Build Status](
+  https://img.shields.io/npm/v/@economist%2Fcomponent-navigation.svg?style=flat-square
+)](
+  https://www.npmjs.com/package/@economist%2Fcomponent-navigation
+)[![Build Status](
+  https://img.shields.io/travis/economist-components/component-navigation/master.svg?style=flat-square
+)](
+  https://travis-ci.org/economist-components/component-navigation/branches
+)[![Coverage Status](
+  https://img.shields.io/coveralls/economist-components/component-navigation/master.svg?style=flat-square
+)](
+  https://coveralls.io/github/economist-components/component-navigation?branch=master
+)
 
 # Navigation
 > A navigation masthead
@@ -18,7 +35,11 @@ it within some JSX, like so:
 ```js
 import Navigation from '@economist/component-navigation';
 
-return <Navigation/>;
+return (
+  <Navigation logo={<img src="/logo.png"/>} menu={<ul>...</ul>}>
+    <p>Extra children</p>
+  </Navigation>
+);
 ```
 
 For more examples on usage, see [`src/example.es6`](./src/example.es6).

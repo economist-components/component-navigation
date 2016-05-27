@@ -1,125 +1,107 @@
 import 'babel-polyfill';
-import Navigation from '../src';
 import React from 'react';
+import Navigation from '../src';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import links from './links';
-import moreBalloonData from './more-balloon-data';
 import { mount } from 'enzyme';
-import sectionsCardData from '@economist/component-sections-card/lib/context';
 chai.use(chaiEnzyme()).should();
 describe('Navigation', () => {
-  let props = null;
-  let registered = null;
-  let testNumber = 0;
-  beforeEach(() => {
-    testNumber++;
-    props = {
-      googleSearchDivIDPrefix: `test-${ testNumber }-`,
-      moreBalloonData,
-      sectionsCardData,
-      links: registered,
-      accordionData: [
-        {
-          title: 'Topics',
-          href: '/sections',
-          children: context.sections,
-        },
-        {
-          title: 'Blogs',
-          href: '/blogs',
-          children: context.blogs,
-        },
-        {
-          title: 'Print Edition',
-          href: '/printedition',
-        },
-        {
-          title: 'More',
-          href: '/digital',
-        },
-        {
-          title: 'Subscribe',
-          href: 'https://subscriptions.economist.com/',
-          target: '_blank',
-          unstyled: false,
-          i13nModel: { // eslint-disable-line id-match
-            action: 'click',
-            element: 'subscribe',
-          },
-        },
-      ],
-      sharedMenu: {
-        topic: {
-          title: 'Topics',
-          href: '/sections',
-        },
-        more: {
-          title: 'More',
-          href: '/digital',
-        },
-        subscribe: {
-          title: 'Subscribe',
-          href: 'https://subscriptions.economist.com/',
-        },
-      },
-    };
-    registered = [ links.subscribe, links.myeconomist, links.logout ];
-  });
 
   it('renders a React element', () => {
-    React.isValidElement(<Navigation {...props} />).should.equal(true);
+    React.isValidElement(<Navigation />).should.equal(true);
   });
 
   describe('Rendering', () => {
     let rendered = null;
     let navigation = null;
-    it('renders a top level div.navigation', () => {
-      rendered = mount(<Navigation {...props} className="navigation" />);
+    beforeEach(() => {
+      rendered = mount(<Navigation />);
       navigation = rendered.find('.navigation');
-      navigation.should.have.tagName('div');
-      navigation.should.have.className('navigation');
     });
 
-    it('renders link to /user/login?destination={this.props.currentUrl} when `userLoggedIn` is not set', () => {
-      rendered = mount(<Navigation {...props} className="navigation" currentUrl="/foo/bar" />);
-      rendered.find('.navigation__user-menu-log-in-button')
-        .should.have.attr('href', '/user/login?destination=%2Ffoo%2Fbar');
+    it('has role=banner', () => {
+      navigation.should.have.attr('role', 'banner');
     });
 
-    it('renders link to /logout?destination={this.props.currentUrl} when `userLoggedIn` is set', () => {
-      rendered = mount(<Navigation {...props} userLoggedIn currentUrl="/foo/bar" />);
-      rendered.find('.navigation__user-menu-linklist-link--cta')
-        .should.have.attr('href', '/logout?destination=%2Ffoo%2Fbar');
+    // skipped for now, when https://github.com/producthunt/chai-enzyme/issues/47
+    // is fixed we can remove the `.skip` flag.
+    it.skip('has itemScope', () => {
+      navigation.should.have.attr('itemscope', '');
     });
 
-    it('renders subscribe button when `userIsSubscriber` is not set', () => {
-      rendered = mount(<Navigation {...props} />);
-      rendered.find('.navigation__main-navigation-link-subscribe').should.be.present();
+    it('has itemType=WPHeader', () => {
+      navigation.should.have.attr('itemType', 'http://schema.org/WPHeader');
     });
 
-    it('does not render subscribe button when `userIsSubscriber` is set', () => {
-      rendered = mount(<Navigation {...props} userIsSubscriber />);
-      rendered.find('.navigation__main-navigation-link-subscribe').should.not.be.present();
+
+    it('accepts className prop to append to class attr', () => {
+      mount(<Navigation className="foobar" />).find('.navigation')
+        .should.have.attr('class', 'navigation foobar');
     });
 
-    it('renders links in mobile menu with `isSubscriberLink: true` when `userIsSubscriber` not set', () => {
-      rendered = mount(<Navigation {...props} />);
-      const mobileMenu = rendered.find('.navigation__primary-inner').find('.accordion');
-      mobileMenu.should.have.exactly(5).descendants('.list__item');
-      mobileMenu.childAt(4).find('.link-button')
-        .should.have.text('Subscribe');
+    it('has div.navigation__extra child when given children', () => {
+      mount(<Navigation><div></div></Navigation>).find('.navigation__extra').should.be.present();
     });
 
-    it('does not render links in mobile menu with `isSubscriberLink: true` when `userIsSubscriber` is set', () => {
-      props.accordionData[4].isSubscriberLink = true;
-      rendered = mount(<Navigation {...props} userIsSubscriber />);
-      const mobileMenu = rendered.find('.navigation__primary-inner').find('.accordion');
-      mobileMenu.should.have.exactly(4).descendants('.list__item');
-      mobileMenu.childAt(0).find('.link-button').should.not.have.text('Subscribe');
-      mobileMenu.childAt(1).find('.link-button').should.not.have.text('Subscribe');
-      mobileMenu.childAt(2).find('.link-button').should.not.have.text('Subscribe');
-      mobileMenu.childAt(3).find('.link-button').should.not.have.text('Subscribe');
+    it('appends children to .navigation__extra', () => {
+      mount(<Navigation><div className="child" /></Navigation>).find('.navigation').find('.navigation__extra')
+        .should.have.exactly(1).descendants('.child');
+    });
+
+    describe('with logo prop', () => {
+      let logo = null;
+      beforeEach(() => {
+        rendered = mount(<Navigation logo={<div className="child" />} />);
+        navigation = rendered.find('.navigation');
+        logo = navigation.find('.navigation__logo');
+      });
+
+      // skipped for now, when https://github.com/producthunt/chai-enzyme/issues/47
+      // is fixed we can remove the `.skip` flag.
+      it.skip('has itemScope attr', () => {
+        logo.should.have.attr('itemscope');
+      });
+
+      it('has itemType=Organization', () => {
+        logo.should.have.attr('itemtype', 'http://schema.org/Organization');
+      });
+
+      it('appends `logo` elements as children', () => {
+        logo.should.have.exactly(1).descendants('.child');
+      });
+
+    });
+
+    describe('with menu prop', () => {
+      let menu = null;
+      beforeEach(() => {
+        rendered = mount(<Navigation menu={<div className="child" />} />);
+        navigation = rendered.find('.navigation');
+        menu = navigation.find('.navigation__menu');
+      });
+
+      it('renders nav element', () => {
+        menu.should.have.tagName('nav');
+      });
+
+      it('has role=navigation', () => {
+        menu.should.have.attr('role', 'navigation');
+      });
+
+      // skipped for now, when https://github.com/producthunt/chai-enzyme/issues/47
+      // is fixed we can remove the `.skip` flag.
+      it.skip('has itemScope attr', () => {
+        menu.should.have.attr('itemscope');
+      });
+
+      it('has itemType=SiteNavigationElement', () => {
+        menu.should.have.attr('itemtype', 'http://schema.org/SiteNavigationElement');
+      });
+
+      it('appends `menu` elements as children', () => {
+        menu.should.have.exactly(1).descendants('.child');
+      });
+
     });
 
   });

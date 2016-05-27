@@ -2,15 +2,31 @@
 @import '@economist/component-palette';
 @import '@economist/component-grid';
 @import '@economist/component-icon';
-@import 'sticked.css';
-@import 'index.css';
-
-/* stylelint-disable */
-#component-preview {
-/* stylelint-enable */
-  background: #fff;
-}
+@import './index.css';
 
 .component-panel {
   overflow: hidden;
+}
+
+/* stylelint-disable selector-no-type */
+/* quick and dirty styling of nav ul */
+
+.navigation ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation ul li {
+  margin: 0 10px;
+  list-style: none;
+}
+
+.navigation ul li a {
+  display: block;
+  width: 100%;
+  height: var(--navigation--height);
+  padding-top: 15px;
+  color: var(--color-berlin, #fff);
+  text-decoration: none;
 }
