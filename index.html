@@ -17,7 +17,6 @@ pre[class*&#x3D;&quot;language-&quot;] {
 	background: none;
 	text-shadow: 0 1px white;
 	font-family: Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;
-	direction: ltr;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
@@ -196,18 +195,24 @@ pre[class*&#x3D;&quot;language-&quot;] {
   <body>
         <h1 class="component-title">
       @economist/component-navigation
-      <span>(v0.0.0-development)</span>
+      <span>(v6.0.0)</span>
     </h1>
     <div id="component-preview">
       <script>
       window.addEventListener('load', function () {
-        require('react-dom').render(require('example'),document.getElementById('component-preview'));
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                'default': obj
+            };
+        }
+        require('react-dom').render(_interopRequireDefault(require('example')).default,document.getElementById('component-preview'));
       });
       </script>
     </div>
     <div class="component-panel">
       <h2 id="readme" class="component-panel-heading"><a href="#readme">Readme</a></h2>
-          <h1>Navigation</h1>
+          <p><a href="http://www.economist.com/"><img src="https://img.shields.io/badge/By-Economist-e3120b.svg?style=flat-square" alt="By:Economist"></a><a href="https://www.npmjs.com/package/@economist%2Fcomponent-navigation"><img src="https://img.shields.io/npm/v/@economist%2Fcomponent-navigation.svg?style=flat-square" alt="Build Status"></a><a href="https://travis-ci.org/economist-components/component-navigation/branches"><img src="https://img.shields.io/travis/economist-components/component-navigation/master.svg?style=flat-square" alt="Build Status"></a><a href="https://coveralls.io/github/economist-components/component-navigation?branch=master"><img src="https://img.shields.io/coveralls/economist-components/component-navigation/master.svg?style=flat-square" alt="Coverage Status"></a></p>
+    <h1>Navigation</h1>
     <blockquote>
     <p>A navigation masthead</p>
     </blockquote>
@@ -219,7 +224,11 @@ pre[class*&#x3D;&quot;language-&quot;] {
     it within some JSX, like so:</p>
     <pre><code class="lang-js">import Navigation from '@economist/component-navigation';
     
-    return &lt;Navigation/&gt;;
+    return (
+      &lt;Navigation logo={&lt;img src=&quot;/logo.png&quot;/&gt;} menu={&lt;ul&gt;...&lt;/ul&gt;}&gt;
+        &lt;p&gt;Extra children&lt;/p&gt;
+      &lt;/Navigation&gt;
+    );
     </code></pre>
     <p>For more examples on usage, see <a href="./src/example.es6"><code>src/example.es6</code></a>.</p>
     <h2>Install</h2>
@@ -236,234 +245,33 @@ pre[class*&#x3D;&quot;language-&quot;] {
       <pre><code>    <span class="token keyword" >import</span> <span class="token string" >'babel-polyfill'</span><span class="token punctuation" >;</span>
     <span class="token keyword" >import</span> Navigation <span class="token keyword" >from</span> <span class="token string" >'./'</span><span class="token punctuation" >;</span>
     <span class="token keyword" >import</span> React <span class="token keyword" >from</span> <span class="token string" >'react'</span><span class="token punctuation" >;</span>
-    <span class="token keyword" >import</span> navigationLinks <span class="token keyword" >from</span> <span class="token string" >'@economist/component-sections-card/lib/context'</span><span class="token punctuation" >;</span>
-    <span class="token keyword" >import</span> svgForEverybody <span class="token keyword" >from</span> <span class="token string" >'svg4everybody'</span><span class="token punctuation" >;</span>
-    <span class="token comment" spellcheck="true">// Force media links to use icon as background.</span>
-    <span class="token keyword" >if</span> <span class="token punctuation" >(</span><span class="token keyword" >typeof</span> document <span class="token operator" >===</span> <span class="token string" >'object'</span><span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
-      <span class="token function" >svgForEverybody</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
-    <span class="token punctuation" >}</span>
-    navigationLinks<span class="token punctuation" >.</span>media<span class="token punctuation" >.</span><span class="token function" >forEach</span><span class="token punctuation" >(</span><span class="token punctuation" >(</span>mediaLink<span class="token punctuation" >)</span> <span class="token operator" >=</span><span class="token operator" >></span> <span class="token punctuation" >{</span>
-      mediaLink<span class="token punctuation" >.</span>icon <span class="token operator" >=</span> <span class="token punctuation" >{</span>
-        useBackground<span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
-        color<span class="token punctuation" >:</span> <span class="token string" >'chicago'</span><span class="token punctuation" >,</span>
-        icon<span class="token punctuation" >:</span> mediaLink<span class="token punctuation" >.</span>meta<span class="token punctuation" >,</span>
-      <span class="token punctuation" >}</span><span class="token punctuation" >;</span>
-      <span class="token keyword" >return</span> mediaLink<span class="token punctuation" >;</span>
-    <span class="token punctuation" >}</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
-    <span class="token keyword" >const</span> sharedMenu <span class="token operator" >=</span> <span class="token punctuation" >{</span>
-      topic<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
-        title<span class="token punctuation" >:</span> <span class="token string" >'Topics'</span><span class="token punctuation" >,</span>
-        href<span class="token punctuation" >:</span> <span class="token string" >'/sections'</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      more<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
-        title<span class="token punctuation" >:</span> <span class="token string" >'More'</span><span class="token punctuation" >,</span>
-        href<span class="token punctuation" >:</span> <span class="token string" >'/digital'</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      subscribe<span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
-        title<span class="token punctuation" >:</span> <span class="token string" >'Subscribe'</span><span class="token punctuation" >,</span>
-        href<span class="token punctuation" >:</span> <span class="token string" >'https://subscriptions.economist.com/'</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-    <span class="token punctuation" >}</span><span class="token punctuation" >;</span>
-    <span class="token keyword" >const</span> moreBalloonData <span class="token operator" >=</span> <span class="token punctuation" >{</span>
-      sections<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Economist on iPhone'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'https://itunes.apple.com/us/app/economist-global-business/id951457811?ls=1&amp;mt=8'</span><span class="token punctuation" >,</span>
-          internal<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Economist on iPad'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'https://search.itunes.apple.com/WebObjects/MZContentLink.woa/wa/link?path=apps%2ftheeconomist'</span><span class="token punctuation" >,</span>
-          internal<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Espresso'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'/digital'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Global Business Review'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'/sections/business-finance'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Work in Figures'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'https://worldinfigures.com/'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >]</span><span class="token punctuation" >,</span>
-      <span class="token string" >'media'</span><span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Apps'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'meta'</span><span class="token punctuation" >:</span> <span class="token string" >'apps'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'/digital'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'internal'</span><span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
-          <span class="token string" >'icon'</span><span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
-            <span class="token string" >'useBackground'</span><span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
-            <span class="token string" >'color'</span><span class="token punctuation" >:</span> <span class="token string" >'chicago'</span><span class="token punctuation" >,</span>
-            <span class="token string" >'icon'</span><span class="token punctuation" >:</span> <span class="token string" >'apps'</span><span class="token punctuation" >,</span>
-          <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Audio'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'meta'</span><span class="token punctuation" >:</span> <span class="token string" >'headset'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'/audio-edition'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'internal'</span><span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
-          <span class="token string" >'icon'</span><span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
-            <span class="token string" >'useBackground'</span><span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
-            <span class="token string" >'color'</span><span class="token punctuation" >:</span> <span class="token string" >'chicago'</span><span class="token punctuation" >,</span>
-            <span class="token string" >'icon'</span><span class="token punctuation" >:</span> <span class="token string" >'headset'</span><span class="token punctuation" >,</span>
-          <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Video'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'meta'</span><span class="token punctuation" >:</span> <span class="token string" >'video'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'http://www.economist.com/multimedia'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'internal'</span><span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
-          <span class="token string" >'icon'</span><span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
-            <span class="token string" >'useBackground'</span><span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
-            <span class="token string" >'color'</span><span class="token punctuation" >:</span> <span class="token string" >'chicago'</span><span class="token punctuation" >,</span>
-            <span class="token string" >'icon'</span><span class="token punctuation" >:</span> <span class="token string" >'video'</span><span class="token punctuation" >,</span>
-          <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Radio'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'meta'</span><span class="token punctuation" >:</span> <span class="token string" >'radio'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'http://radio.economist.com/'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'internal'</span><span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
-          <span class="token string" >'icon'</span><span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
-            <span class="token string" >'useBackground'</span><span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
-            <span class="token string" >'color'</span><span class="token punctuation" >:</span> <span class="token string" >'chicago'</span><span class="token punctuation" >,</span>
-            <span class="token string" >'icon'</span><span class="token punctuation" >:</span> <span class="token string" >'radio'</span><span class="token punctuation" >,</span>
-          <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Films'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'meta'</span><span class="token punctuation" >:</span> <span class="token string" >'film'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'http://films.economist.com/'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'internal'</span><span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
-          <span class="token string" >'icon'</span><span class="token punctuation" >:</span> <span class="token punctuation" >{</span>
-            <span class="token string" >'useBackground'</span><span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
-            <span class="token string" >'color'</span><span class="token punctuation" >:</span> <span class="token string" >'chicago'</span><span class="token punctuation" >,</span>
-            <span class="token string" >'icon'</span><span class="token punctuation" >:</span> <span class="token string" >'film'</span><span class="token punctuation" >,</span>
-          <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >]</span><span class="token punctuation" >,</span>
-      <span class="token string" >'blogs'</span><span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Events'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'/events-conferences'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Jobs Board'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'http://jobs.economist.com/'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Which MBA'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'/whichmba'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Executive Education Navigator'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'https://execed.economist.com/'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'GMAT tutor'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'https://gmat.economist.com/'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'GRE tutor'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'https://gre.economist.com/'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'Learning.ly'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'https://learning.ly'</span><span class="token punctuation" >,</span>
-          internal<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >{</span>
-          <span class="token string" >'title'</span><span class="token punctuation" >:</span> <span class="token string" >'1843'</span><span class="token punctuation" >,</span>
-          <span class="token string" >'href'</span><span class="token punctuation" >:</span> <span class="token string" >'/help/about-us'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >]</span><span class="token punctuation" >,</span>
-    <span class="token punctuation" >}</span><span class="token punctuation" >;</span>
-    <span class="token keyword" >const</span> accordionContext <span class="token operator" >=</span> <span class="token punctuation" >[</span>
-      <span class="token punctuation" >{</span>
-        title<span class="token punctuation" >:</span> sharedMenu<span class="token punctuation" >.</span>topic<span class="token punctuation" >.</span>title<span class="token punctuation" >,</span>
-        href<span class="token punctuation" >:</span> sharedMenu<span class="token punctuation" >.</span>topic<span class="token punctuation" >.</span>href<span class="token punctuation" >,</span>
-        children<span class="token punctuation" >:</span> navigationLinks<span class="token punctuation" >.</span>sections<span class="token punctuation" >,</span>
-      <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >{</span>
-        title<span class="token punctuation" >:</span> <span class="token string" >'Blogs'</span><span class="token punctuation" >,</span>
-        href<span class="token punctuation" >:</span> <span class="token string" >'/blogs'</span><span class="token punctuation" >,</span>
-        children<span class="token punctuation" >:</span> navigationLinks<span class="token punctuation" >.</span>blogs<span class="token punctuation" >,</span>
-      <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >{</span>
-        title<span class="token punctuation" >:</span> <span class="token string" >'Print Edition'</span><span class="token punctuation" >,</span>
-        href<span class="token punctuation" >:</span> <span class="token string" >'/printedition'</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span>navigationLinks<span class="token punctuation" >.</span>media<span class="token punctuation" >,</span>
-      <span class="token punctuation" >{</span>
-        title<span class="token punctuation" >:</span> <span class="token string" >'Products'</span><span class="token punctuation" >,</span>
-        children<span class="token punctuation" >:</span> <span class="token punctuation" >[</span>
-          <span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span>moreBalloonData<span class="token punctuation" >.</span>sections<span class="token punctuation" >,</span>
-          <span class="token punctuation" >{</span> hr<span class="token punctuation" >:</span> <span class="token boolean" >true</span> <span class="token punctuation" >}</span><span class="token punctuation" >,</span> <span class="token comment" spellcheck="true">// eslint-disable-line id-length</span>
-          <span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span>moreBalloonData<span class="token punctuation" >.</span>blogs<span class="token punctuation" >,</span>
-        <span class="token punctuation" >]</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >{</span>
-        title<span class="token punctuation" >:</span> sharedMenu<span class="token punctuation" >.</span>more<span class="token punctuation" >.</span>title<span class="token punctuation" >,</span>
-        href<span class="token punctuation" >:</span> sharedMenu<span class="token punctuation" >.</span>more<span class="token punctuation" >.</span>href<span class="token punctuation" >,</span>
-      <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >{</span>
-        title<span class="token punctuation" >:</span> sharedMenu<span class="token punctuation" >.</span>subscribe<span class="token punctuation" >.</span>title<span class="token punctuation" >,</span>
-        href<span class="token punctuation" >:</span> sharedMenu<span class="token punctuation" >.</span>subscribe<span class="token punctuation" >.</span>href<span class="token punctuation" >,</span>
-        target<span class="token punctuation" >:</span> <span class="token string" >'_blank'</span><span class="token punctuation" >,</span>
-        isSubscriberLink<span class="token punctuation" >:</span> <span class="token boolean" >true</span><span class="token punctuation" >,</span>
-        unstyled<span class="token punctuation" >:</span> <span class="token boolean" >false</span><span class="token punctuation" >,</span>
-        i13nModel<span class="token punctuation" >:</span> <span class="token punctuation" >{</span> <span class="token comment" spellcheck="true">// eslint-disable-line id-match</span>
-          action<span class="token punctuation" >:</span> <span class="token string" >'click'</span><span class="token punctuation" >,</span>
-          element<span class="token punctuation" >:</span> <span class="token string" >'subscribe'</span><span class="token punctuation" >,</span>
-        <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-      <span class="token punctuation" >}</span><span class="token punctuation" >,</span>
-    <span class="token punctuation" >]</span><span class="token punctuation" >;</span>
+    <span class="token keyword" >import</span> Icon <span class="token keyword" >from</span> <span class="token string" >'@economist/component-icon'</span><span class="token punctuation" >;</span>
     <span class="token keyword" >export</span> <span class="token keyword" >default</span> <span class="token punctuation" >(</span>
       <span class="token operator" >&lt;</span>div<span class="token operator" >></span>
         <span class="token operator" >&lt;</span>div<span class="token operator" >></span>
-            <span class="token operator" >&lt;</span>Navigation className<span class="token operator" >=</span><span class="token string" >"navigation navigation--registered navigation--sticked"</span>
-              svgUri<span class="token operator" >=</span><span class="token string" >"assets/icons.svg"</span>
-              sectionsCardData<span class="token operator" >=</span><span class="token punctuation" >{</span>navigationLinks<span class="token punctuation" >}</span>
-              moreBalloonData<span class="token operator" >=</span><span class="token punctuation" >{</span>moreBalloonData<span class="token punctuation" >}</span>
-              accordionData<span class="token operator" >=</span><span class="token punctuation" >{</span>accordionContext<span class="token punctuation" >}</span>
-              sharedMenu<span class="token operator" >=</span><span class="token punctuation" >{</span>sharedMenu<span class="token punctuation" >}</span>
-            <span class="token operator" >/</span><span class="token operator" >></span>
+            <span class="token operator" >&lt;</span>Navigation
+              sticky
+              className<span class="token operator" >=</span><span class="token string" >"navigation--a"</span>
+              logo<span class="token operator" >=</span><span class="token punctuation" >{</span>
+                <span class="token operator" >&lt;</span>a href<span class="token operator" >=</span><span class="token string" >"http://economist.com"</span> itemProp<span class="token operator" >=</span><span class="token string" >"url"</span><span class="token operator" >></span>
+                  <span class="token operator" >&lt;</span>Icon icon<span class="token operator" >=</span><span class="token string" >"economist"</span> itemProp<span class="token operator" >=</span><span class="token string" >"logo"</span> <span class="token operator" >/</span><span class="token operator" >></span>
+                <span class="token operator" >&lt;</span><span class="token operator" >/</span>a<span class="token operator" >></span>
+              <span class="token punctuation" >}</span>
+              menu<span class="token operator" >=</span><span class="token punctuation" >{</span>
+                <span class="token operator" >&lt;</span>ul role<span class="token operator" >=</span><span class="token string" >"presentation"</span><span class="token operator" >></span>
+                  <span class="token operator" >&lt;</span>li<span class="token operator" >></span><span class="token operator" >&lt;</span>a href<span class="token operator" >=</span><span class="token string" >"/foo"</span> itemProp<span class="token operator" >=</span><span class="token string" >"url"</span><span class="token operator" >></span><span class="token operator" >&lt;</span>span itemProp<span class="token operator" >=</span><span class="token string" >"name"</span><span class="token operator" >></span>Foo<span class="token operator" >&lt;</span><span class="token operator" >/</span>span<span class="token operator" >></span><span class="token operator" >&lt;</span><span class="token operator" >/</span>a<span class="token operator" >></span><span class="token operator" >&lt;</span><span class="token operator" >/</span>li<span class="token operator" >></span>
+                  <span class="token operator" >&lt;</span>li<span class="token operator" >></span><span class="token operator" >&lt;</span>a href<span class="token operator" >=</span><span class="token string" >"/foo"</span> itemProp<span class="token operator" >=</span><span class="token string" >"url"</span><span class="token operator" >></span><span class="token operator" >&lt;</span>span itemProp<span class="token operator" >=</span><span class="token string" >"name"</span><span class="token operator" >></span>Bar<span class="token operator" >&lt;</span><span class="token operator" >/</span>span<span class="token operator" >></span><span class="token operator" >&lt;</span><span class="token operator" >/</span>a<span class="token operator" >></span><span class="token operator" >&lt;</span><span class="token operator" >/</span>li<span class="token operator" >></span>
+                  <span class="token operator" >&lt;</span>li<span class="token operator" >></span><span class="token operator" >&lt;</span>a href<span class="token operator" >=</span><span class="token string" >"/foo"</span> itemProp<span class="token operator" >=</span><span class="token string" >"url"</span><span class="token operator" >></span><span class="token operator" >&lt;</span>span itemProp<span class="token operator" >=</span><span class="token string" >"name"</span><span class="token operator" >></span>Baz<span class="token operator" >&lt;</span><span class="token operator" >/</span>span<span class="token operator" >></span><span class="token operator" >&lt;</span><span class="token operator" >/</span>a<span class="token operator" >></span><span class="token operator" >&lt;</span><span class="token operator" >/</span>li<span class="token operator" >></span>
+                <span class="token operator" >&lt;</span><span class="token operator" >/</span>ul<span class="token operator" >></span>
+              <span class="token punctuation" >}</span>
+            <span class="token operator" >></span>
+              <span class="token operator" >&lt;</span>ul<span class="token operator" >></span>
+                <span class="token operator" >&lt;</span>li<span class="token operator" >></span><span class="token operator" >&lt;</span>a<span class="token operator" >></span>Extra children go here<span class="token punctuation" >.</span><span class="token operator" >&lt;</span><span class="token operator" >/</span>a<span class="token operator" >></span><span class="token operator" >&lt;</span><span class="token operator" >/</span>li<span class="token operator" >></span>
+              <span class="token operator" >&lt;</span><span class="token operator" >/</span>ul<span class="token operator" >></span>
+            <span class="token operator" >&lt;</span><span class="token operator" >/</span>Navigation<span class="token operator" >></span>
             <span class="token operator" >&lt;</span>p style<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token punctuation" >{</span> paddingBottom<span class="token punctuation" >:</span> <span class="token string" >'400px'</span> <span class="token punctuation" >}</span><span class="token punctuation" >}</span><span class="token operator" >></span>
               Scroll down to experience the thrill <span class="token keyword" >of</span> sticky header technology
             <span class="token operator" >&lt;</span><span class="token operator" >/</span>p<span class="token operator" >></span>
-        <span class="token operator" >&lt;</span><span class="token operator" >/</span>div<span class="token operator" >></span>
-        <span class="token operator" >&lt;</span>div<span class="token operator" >></span>
-          <span class="token operator" >&lt;</span>Navigation className<span class="token operator" >=</span><span class="token string" >"navigation navigation--registered navigation--sticked"</span>
-            svgUri<span class="token operator" >=</span><span class="token string" >"assets/icons.svg"</span>
-            userLoggedIn
-            sectionsCardData<span class="token operator" >=</span><span class="token punctuation" >{</span>navigationLinks<span class="token punctuation" >}</span>
-            accordionData<span class="token operator" >=</span><span class="token punctuation" >{</span>accordionContext<span class="token punctuation" >}</span>
-            moreBalloonData<span class="token operator" >=</span><span class="token punctuation" >{</span>moreBalloonData<span class="token punctuation" >}</span>
-            sharedMenu<span class="token operator" >=</span><span class="token punctuation" >{</span>sharedMenu<span class="token punctuation" >}</span>
-            googleSearchDivIDPrefix<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token string" >'b-'</span><span class="token punctuation" >}</span>
-          <span class="token operator" >/</span><span class="token operator" >></span>
-          <span class="token operator" >&lt;</span>p style<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token punctuation" >{</span> paddingBottom<span class="token punctuation" >:</span> <span class="token string" >'400px'</span> <span class="token punctuation" >}</span><span class="token punctuation" >}</span><span class="token operator" >></span>
-            Scroll down to experience the thrill <span class="token keyword" >of</span> sticky header technology
-          <span class="token operator" >&lt;</span><span class="token operator" >/</span>p<span class="token operator" >></span>
-        <span class="token operator" >&lt;</span><span class="token operator" >/</span>div<span class="token operator" >></span>
-        <span class="token operator" >&lt;</span>div<span class="token operator" >></span>
-          <span class="token operator" >&lt;</span>Navigation className<span class="token operator" >=</span><span class="token string" >"navigation navigation--registered navigation--sticked"</span>
-            svgUri<span class="token operator" >=</span><span class="token string" >"assets/icons.svg"</span>
-            userLoggedIn
-            userIsSubscriber
-            sectionsCardData<span class="token operator" >=</span><span class="token punctuation" >{</span>navigationLinks<span class="token punctuation" >}</span>
-            accordionData<span class="token operator" >=</span><span class="token punctuation" >{</span>accordionContext<span class="token punctuation" >}</span>
-            moreBalloonData<span class="token operator" >=</span><span class="token punctuation" >{</span>moreBalloonData<span class="token punctuation" >}</span>
-            sharedMenu<span class="token operator" >=</span><span class="token punctuation" >{</span>sharedMenu<span class="token punctuation" >}</span>
-            googleSearchDivIDPrefix<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token string" >'c-'</span><span class="token punctuation" >}</span>
-          <span class="token operator" >/</span><span class="token operator" >></span>
-          <span class="token operator" >&lt;</span>p style<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token punctuation" >{</span> paddingBottom<span class="token punctuation" >:</span> <span class="token string" >'400px'</span> <span class="token punctuation" >}</span><span class="token punctuation" >}</span><span class="token operator" >></span>
-            Scroll down to experience the thrill <span class="token keyword" >of</span> sticky header technology
-          <span class="token operator" >&lt;</span><span class="token operator" >/</span>p<span class="token operator" >></span>
         <span class="token operator" >&lt;</span><span class="token operator" >/</span>div<span class="token operator" >></span>
       <span class="token operator" >&lt;</span><span class="token operator" >/</span>div<span class="token operator" >></span>
     <span class="token punctuation" >)</span><span class="token punctuation" >;</span>
